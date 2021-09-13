@@ -1,16 +1,3 @@
 # srilankan_airline
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Dashboard-2](https://user-images.githubusercontent.com/54674887/133075981-cd83482f-46fe-49f1-9d42-e8ccf3ebea95.png)
+![Splash Screen](https://user-images.githubusercontent.com/54674887/133075990-80824da8-6053-4d94-b650-b93107644355.png)
