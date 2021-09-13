@@ -1,8 +1,8 @@
-import 'package:container_tab_indicator/container_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/screens/bookflight/flightreturn.dart';
 import 'package:srilankan_airline/screens/bookflight/onewayflight.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
+import '../../Util/colors.dart' as color;
 
 class bookaflight extends StatefulWidget {
   bookaflight({Key? key}) : super(key: key);
@@ -34,8 +34,8 @@ class _bookaflightState extends State<bookaflight>
             height: 20,
           ),
           TabBar(
-            unselectedLabelColor: Colors.black38,
-            labelColor: Color(0xff018bef),
+            unselectedLabelColor: color.AppColor.tabunselectedColor,
+            labelColor: color.AppColor.tabselectedColor,
             tabs: [
               Tab(
                 text: 'Return',

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:srilankan_airline/screens/MainScreen.dart';
 import 'package:srilankan_airline/screens/Register.dart';
-import 'package:srilankan_airline/screens/dashboard/dashboard.dart';
-
+import '../Util/colors.dart' as color;
 class login extends StatefulWidget {
   login({Key? key}) : super(key: key);
 
@@ -22,12 +21,12 @@ class _loginState extends State<login> {
             child: Text(
               "Login",
               style: TextStyle(
-                color: Colors.black38,
+                color: color.AppColor.textTitleColor,
               ),
             ),
           ),
           elevation: 0,
-          backgroundColor: Colors.white,
+          backgroundColor: color.AppColor.loginPageBackground,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -54,10 +53,10 @@ class _loginState extends State<login> {
                   textAlign: TextAlign.left,
                   controller: userName,
                   decoration: InputDecoration(
-                      focusColor: Colors.black,
+                      focusColor: color.AppColor.textFieldFocusColor,
                       labelText: "UserName",
                       prefixIcon: Icon(Icons.person),
-                      hintStyle: TextStyle(color: Colors.black26),
+                      hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(9.0)))),
@@ -70,10 +69,10 @@ class _loginState extends State<login> {
                   textAlign: TextAlign.left,
                   controller: password,
                   decoration: InputDecoration(
-                      focusColor: Colors.black,
+                      focusColor: color.AppColor.textFieldFocusColor,
                       labelText: "Password",
                       prefixIcon: Icon(Icons.lock),
-                      hintStyle: TextStyle(color: Colors.black26),
+                      hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(9.0)))),
@@ -84,7 +83,7 @@ class _loginState extends State<login> {
                 Center(
                   child: Material(
                     elevation: 2,
-                    color: Color(0xFF018bef),
+                    color: color.AppColor.buttonColor,
                     borderRadius: BorderRadius.circular(12.0),
                     child: MaterialButton(
                       onPressed: () {
@@ -120,7 +119,7 @@ class _loginState extends State<login> {
                       ),
                       Material(
                         elevation: 1,
-                        color: Color(0xFF000000),
+                        color: color.AppColor.loginWithAppleBackground,
                         borderRadius: BorderRadius.circular(16.0),
                         child: MaterialButton(
                           onPressed: () {},
@@ -128,14 +127,14 @@ class _loginState extends State<login> {
                           minWidth: 10,
                           child: FaIcon(
                             FontAwesomeIcons.apple,
-                            color: Colors.white,
+                            color: color.AppColor.loginWithAppleIcon,
                             size: 16,
                           ),
                         ),
                       ),
                       Material(
                         elevation: 1,
-                        color: Color(0xFFFFFFFF),
+                        color: color.AppColor.loginWithGoogleBackground,
                         borderRadius: BorderRadius.circular(16.0),
                         child: MaterialButton(
                           onPressed: () {},
@@ -143,14 +142,14 @@ class _loginState extends State<login> {
                           minWidth: 15,
                           child: FaIcon(
                             FontAwesomeIcons.google,
-                            color: Colors.red,
+                            color: color.AppColor.loginWithGoogleIcon,
                             size: 16,
                           ),
                         ),
                       ),
                       Material(
                         elevation: 1,
-                        color: Color(0xFF4267b2),
+                        color: color.AppColor.loginWithFacebookBackground,
                         borderRadius: BorderRadius.circular(16.0),
                         child: MaterialButton(
                           onPressed: () {},
@@ -158,7 +157,7 @@ class _loginState extends State<login> {
                           minWidth: 12,
                           child: FaIcon(
                             FontAwesomeIcons.facebookF,
-                            color: Colors.white,
+                            color: color.AppColor.loginWithFacebookIcon,
                             size: 16,
                           ),
                         ),
