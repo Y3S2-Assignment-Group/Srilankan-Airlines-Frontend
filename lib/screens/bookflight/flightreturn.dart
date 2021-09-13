@@ -141,50 +141,39 @@ class _returnFlightState extends State<returnFlight> {
                           child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        "From",
-                                        style: TextStyle(fontSize: 15),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "Doha",
-                                            style: TextStyle(
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xff018bef)),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            "DHO",
-                                            style: TextStyle(
-                                                fontSize: 25,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xff5f707e)),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        "Hamad international airport",
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
+                                Text(
+                                  "Departure",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                Text(
+                                  "26 Jul 2021",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Return",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                Text(
+                                  "30 Jul 2021",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       )),
@@ -203,44 +192,37 @@ class _returnFlightState extends State<returnFlight> {
                           child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "To",
-                              style: TextStyle(fontSize: 15),
-                            ),
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Colombo",
+                                  "1 passenger",
                                   style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff018bef)),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "COL",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff5f707e)),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
-                            Text(
-                              "Katunayake international airport",
-                              style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Economy",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff018bef)),
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       )),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
