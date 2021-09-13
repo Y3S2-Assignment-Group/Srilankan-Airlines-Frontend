@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:srilankan_airline/screens/dashboard/dashboard.dart';
-import 'package:srilankan_airline/screens/flightbook.dart';
+import 'package:srilankan_airline/screens/bookflight/flightbook.dart';
 import 'package:srilankan_airline/screens/mytrips.dart';
 import 'package:srilankan_airline/screens/profile.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
@@ -27,34 +27,7 @@ class _mainScreenState extends State<mainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(500, 0, 183, 255),
-              Color.fromARGB(0, 0, 183, 255),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Center(
-            child: Column(
-          children: [
-            SizedBox(
-              height: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: appbar(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            buildPages(),
-          ],
-        )),
-      ),
+      body: buildPages(),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
