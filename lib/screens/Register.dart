@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/screens/Login.dart';
-
+import '../Util/colors.dart' as color;
 class register extends StatefulWidget {
   register({Key? key}) : super(key: key);
 
@@ -49,10 +49,10 @@ class _registerState extends State<register> {
                       textAlign: TextAlign.left,
                       controller: userName,
                       decoration: InputDecoration(
-                          focusColor: Colors.black,
+                          focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "UserName",
                           prefixIcon: Icon(Icons.person),
-                          hintStyle: TextStyle(color: Colors.black26),
+                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -65,10 +65,10 @@ class _registerState extends State<register> {
                       textAlign: TextAlign.left,
                       controller: email,
                       decoration: InputDecoration(
-                          focusColor: Colors.black,
+                          focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Email",
                           prefixIcon: Icon(Icons.email),
-                          hintStyle: TextStyle(color: Colors.black26),
+                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -81,10 +81,10 @@ class _registerState extends State<register> {
                       textAlign: TextAlign.left,
                       controller: passportNumber,
                       decoration: InputDecoration(
-                          focusColor: Colors.black,
+                          focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Passport Number",
                           prefixIcon: Icon(Icons.book),
-                          hintStyle: TextStyle(color: Colors.black26),
+                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -97,10 +97,10 @@ class _registerState extends State<register> {
                       textAlign: TextAlign.left,
                       controller: mobileNumber,
                       decoration: InputDecoration(
-                          focusColor: Colors.black,
+                          focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Mobile Number",
                           prefixIcon: Icon(Icons.phone),
-                          hintStyle: TextStyle(color: Colors.black26),
+                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -113,10 +113,10 @@ class _registerState extends State<register> {
                       textAlign: TextAlign.left,
                       controller: password,
                       decoration: InputDecoration(
-                          focusColor: Colors.black,
+                          focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Password",
                           prefixIcon: Icon(Icons.password),
-                          hintStyle: TextStyle(color: Colors.black26),
+                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -127,7 +127,7 @@ class _registerState extends State<register> {
                     Center(
                       child: Material(
                         elevation: 2,
-                        color: Color(0xFF018bef),
+                        color: color.AppColor.buttonColor,
                         borderRadius: BorderRadius.circular(12.0),
                         child: MaterialButton(
                           onPressed: () {
@@ -141,7 +141,7 @@ class _registerState extends State<register> {
                           child: Text(
                             "Sign Up",
                             style: TextStyle(
-                                color: Colors.white,
+                                color: color.AppColor.buttonTextColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20.0),
                           ),
