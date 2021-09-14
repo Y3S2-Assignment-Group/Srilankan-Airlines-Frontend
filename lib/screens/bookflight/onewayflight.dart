@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srilankan_airline/screens/bookflight/flightSeatbook.dart';
 import '../../Util/colors.dart' as color;
 
 class onewayFlight extends StatefulWidget {
@@ -222,7 +223,12 @@ class _onewayFlightState extends State<onewayFlight> {
               color: color.AppColor.buttonColor,
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  //Navigator.push(
+                  //context,
+                  //MaterialPageRoute(builder: (context) => seatbook()),
+                  //);
+                },
                 minWidth: 200.0,
                 height: 45.0,
                 child: Text(
