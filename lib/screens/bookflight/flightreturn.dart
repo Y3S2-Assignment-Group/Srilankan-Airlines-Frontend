@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srilankan_airline/screens/bookflight/flightSeatbook.dart';
 
 class returnFlight extends StatefulWidget {
   returnFlight({Key? key}) : super(key: key);
@@ -236,7 +237,12 @@ class _returnFlightState extends State<returnFlight> {
               color: Color(0xFF018bef),
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => seatbook()),
+                  );
+                },
                 minWidth: 200.0,
                 height: 45.0,
                 child: Text(

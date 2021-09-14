@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class appbar extends StatefulWidget {
   appbar({Key? key}) : super(key: key);
@@ -19,10 +20,7 @@ class _appbarState extends State<appbar> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                  width: 90,
-                )
+                Lottie.asset('assets/images/appbarlottie.json', width: 80),
               ],
             ),
             Column(

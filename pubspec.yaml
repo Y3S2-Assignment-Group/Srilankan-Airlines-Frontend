@@ -54,6 +54,8 @@ flutter:
     - assets/images/
     - assets/images/splashscreen.json
     - assets/icons/airline.svg
+    - assets/images/appbarlottie.json
+    - assets/images/splashnew.json
 
   fonts:
     - family: Srilankan
