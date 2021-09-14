@@ -4,8 +4,7 @@ import 'package:srilankan_airline/screens/dashboard/dashboard.dart';
 import 'package:srilankan_airline/screens/bookflight/flightbook.dart';
 import 'package:srilankan_airline/screens/mytrips.dart';
 import 'package:srilankan_airline/screens/profile.dart';
-import 'package:srilankan_airline/widgets/appbar.dart';
-
+import '../Util/colors.dart' as color;
 class mainScreen extends StatefulWidget {
   mainScreen({Key? key}) : super(key: key);
 
@@ -39,35 +38,35 @@ class _mainScreenState extends State<mainScreen> {
                   color: Colors.red,
                 )),
             label: 'Home',
-            backgroundColor: Color(0xFFFFFFFF),
+            backgroundColor: color.AppColor.bottomNavItemBackground,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.flight,
-              color: Colors.black,
+              color: color.AppColor.bottomNavIconColor,
             ),
             label: 'Book',
-            backgroundColor: Color(0xFFFFFFFF),
+            backgroundColor: color.AppColor.bottomNavItemBackground,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.calendar_today,
-              color: Colors.black,
+              color: color.AppColor.bottomNavIconColor,
             ),
             label: 'Schedule',
-            backgroundColor: Color(0xFFFFFFFF),
+            backgroundColor: color.AppColor.bottomNavItemBackground,
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
-              color: Colors.black,
+              color: color.AppColor.bottomNavIconColor,
             ),
             label: 'Profile',
-            backgroundColor: Color(0xFFFFFFFF),
+            backgroundColor: color.AppColor.bottomNavItemBackground,
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
+        selectedItemColor: color.AppColor.bottomNavIconColor,
         onTap: _onItemTapped,
       ),
     );

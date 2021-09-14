@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/screens/bookflight/flightSeatbook.dart';
+import '../../Util/colors.dart' as color;
 
 class onewayFlight extends StatefulWidget {
   onewayFlight({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _onewayFlightState extends State<onewayFlight> {
             padding: const EdgeInsets.all(12),
             child: Container(
               decoration: BoxDecoration(
-                  color: Color(0x7ECCCCCC),
+                  color: color.AppColor.cardColor,
                   borderRadius: BorderRadius.circular(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +45,7 @@ class _onewayFlightState extends State<onewayFlight> {
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff018bef)),
+                                      color: color.AppColor.airportColor),
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -54,7 +55,7 @@ class _onewayFlightState extends State<onewayFlight> {
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff5f707e)),
+                                      color: color.AppColor.airportabrColor),
                                 ),
                               ],
                             ),
@@ -71,7 +72,7 @@ class _onewayFlightState extends State<onewayFlight> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Divider(
-                      color: Colors.black,
+                      color: color.AppColor.divider,
                       thickness: 1,
                     ),
                   ),
@@ -95,7 +96,7 @@ class _onewayFlightState extends State<onewayFlight> {
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff018bef)),
+                                      color: color.AppColor.airportColor),
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -105,7 +106,7 @@ class _onewayFlightState extends State<onewayFlight> {
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xff5f707e)),
+                                      color: color.AppColor.airportabrColor),
                                 ),
                               ],
                             ),
@@ -131,7 +132,7 @@ class _onewayFlightState extends State<onewayFlight> {
             padding: const EdgeInsets.all(12),
             child: Container(
               decoration: BoxDecoration(
-                  color: Color(0x7ECCCCCC),
+                  color: color.AppColor.cardColor,
                   borderRadius: BorderRadius.circular(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +169,7 @@ class _onewayFlightState extends State<onewayFlight> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Divider(
-                      color: Colors.black,
+                      color: color.AppColor.divider,
                       thickness: 1,
                     ),
                   ),
@@ -219,14 +220,14 @@ class _onewayFlightState extends State<onewayFlight> {
           Center(
             child: Material(
               elevation: 2,
-              color: Color(0xFF018bef),
+              color: color.AppColor.buttonColor,
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => seatbook()),
-                  );
+                  //Navigator.push(
+                  //context,
+                  //MaterialPageRoute(builder: (context) => seatbook()),
+                  //);
                 },
                 minWidth: 200.0,
                 height: 45.0,

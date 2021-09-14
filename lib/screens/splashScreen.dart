@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:srilankan_airline/screens/Login.dart';
+import '../Util/colors.dart' as color;
+
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: color.AppColor.splashScreenBackground,
       body: Container(
         alignment: Alignment.center,
         child: Expanded(
