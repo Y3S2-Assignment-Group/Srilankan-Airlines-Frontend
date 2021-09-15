@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srilankan_airline/modules/BottomNavigation.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
@@ -10,8 +11,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: null,
+    return Scaffold(
+      bottomNavigationBar: BottomNavigation(selIndex:3),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:srilankan_airline/screens/Login.dart';
-import '../Util/colors.dart' as color;
+import 'package:srilankan_airline/screens/Login/Login.dart';
+import '../../Util/colors.dart' as color;
 class register extends StatefulWidget {
   register({Key? key}) : super(key: key);
 
@@ -18,6 +18,18 @@ class _registerState extends State<register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Center(
+            child: Text(
+              "Register",
+              style: TextStyle(
+                color: color.AppColor.textTitleColor,
+              ),
+            ),
+          ),
+          elevation: 0,
+          backgroundColor: color.AppColor.loginPageBackground,
+        ),
       body: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -25,13 +37,6 @@ class _registerState extends State<register> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 80,
-                ),
-                Text(
-                  "Register",
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
-                ),
                 SizedBox(
                   height: 20,
                 ),

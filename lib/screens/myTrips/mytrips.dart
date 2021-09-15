@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srilankan_airline/modules/BottomNavigation.dart';
 
 class myTrips extends StatefulWidget {
   myTrips({Key? key}) : super(key: key);
@@ -10,8 +11,9 @@ class myTrips extends StatefulWidget {
 class _myTripsState extends State<myTrips> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: null,
+    return Scaffold(
+      
+      bottomNavigationBar: BottomNavigation(),
     );
   }
 }

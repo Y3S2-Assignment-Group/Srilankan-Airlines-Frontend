@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:srilankan_airline/screens/MainScreen.dart';
-import 'package:srilankan_airline/screens/Register.dart';
-import '../Util/colors.dart' as color;
+import 'package:srilankan_airline/screens/Register/Register.dart';
+import '../../Util/colors.dart' as color;
+
 class login extends StatefulWidget {
   login({Key? key}) : super(key: key);
 
@@ -56,7 +56,8 @@ class _loginState extends State<login> {
                       focusColor: color.AppColor.textFieldFocusColor,
                       labelText: "UserName",
                       prefixIcon: Icon(Icons.person),
-                      hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
+                      hintStyle:
+                          TextStyle(color: color.AppColor.textFieldHintColor),
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(9.0)))),
@@ -72,7 +73,8 @@ class _loginState extends State<login> {
                       focusColor: color.AppColor.textFieldFocusColor,
                       labelText: "Password",
                       prefixIcon: Icon(Icons.lock),
-                      hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
+                      hintStyle:
+                          TextStyle(color: color.AppColor.textFieldHintColor),
                       border: OutlineInputBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(9.0)))),
@@ -87,10 +89,7 @@ class _loginState extends State<login> {
                     borderRadius: BorderRadius.circular(12.0),
                     child: MaterialButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => mainScreen()),
-                        );
+                        Navigator.pushNamed(context, '/home');
                       },
                       minWidth: 200.0,
                       height: 45.0,
@@ -199,10 +198,7 @@ class _loginState extends State<login> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => register()),
-                    );
+                    Navigator.pushNamed(context, '/register');
                   },
                   child: new Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
