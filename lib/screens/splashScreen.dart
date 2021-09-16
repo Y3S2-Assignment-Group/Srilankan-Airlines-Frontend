@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:srilankan_airline/screens/Login.dart';
+import 'package:srilankan_airline/screens/Login/Login.dart';
 import '../Util/colors.dart' as color;
 
 
@@ -28,11 +28,7 @@ class _SplashScreenState extends State<SplashScreen>
     });
     //set time to load the new page
     Future.delayed(Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => login(),
-          ));
+      Navigator.pushNamed(context, '/login');
     });
     super.initState();
   }
