@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/screens/Login.dart';
 import '../Util/colors.dart' as color;
+import 'package:image_picker/image_picker.dart';
+
 class register extends StatefulWidget {
   register({Key? key}) : super(key: key);
 
@@ -14,6 +18,9 @@ class _registerState extends State<register> {
   final passportNumber = TextEditingController();
   final mobileNumber = TextEditingController();
   final password = TextEditingController();
+
+  File? _imageFile;
+  final _picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +37,43 @@ class _registerState extends State<register> {
                 ),
                 Text(
                   "Register",
-                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "We warmly welcome you to Sri Lankan Airlines",
+                  style: TextStyle(fontSize: 15),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Text(
-                  "We warmly welcome you to Sri Lankan Airlines",
-                  style: TextStyle(fontSize: 28),
-                ),
-                SizedBox(
-                  height: 60,
-                ),
                 Column(
                   children: [
+                    if (this._imageFile == null)
+                      SizedBox(
+                          width: 80, height: 80, child: const Placeholder())
+                    else
+                      Container(
+                          width: 80,
+                          height: 80,
+                          child: Image.file(this._imageFile!)),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                          icon: const Icon(Icons.photo_camera),
+                          onPressed: () async => _pickImageFromCamera(),
+                          tooltip: 'Shoot picture',
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.photo),
+                          onPressed: () async => _pickImageFromGallery(),
+                          tooltip: 'Pick from gallery',
+                        ),
+                      ],
+                    ),
                     TextFormField(
                       keyboardType: TextInputType.text,
                       textAlign: TextAlign.left,
@@ -52,7 +82,8 @@ class _registerState extends State<register> {
                           focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "UserName",
                           prefixIcon: Icon(Icons.person),
-                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
+                          hintStyle: TextStyle(
+                              color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -68,7 +99,8 @@ class _registerState extends State<register> {
                           focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Email",
                           prefixIcon: Icon(Icons.email),
-                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
+                          hintStyle: TextStyle(
+                              color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -84,7 +116,8 @@ class _registerState extends State<register> {
                           focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Passport Number",
                           prefixIcon: Icon(Icons.book),
-                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
+                          hintStyle: TextStyle(
+                              color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -100,7 +133,8 @@ class _registerState extends State<register> {
                           focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Mobile Number",
                           prefixIcon: Icon(Icons.phone),
-                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
+                          hintStyle: TextStyle(
+                              color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -116,7 +150,8 @@ class _registerState extends State<register> {
                           focusColor: color.AppColor.textFieldFocusColor,
                           labelText: "Password",
                           prefixIcon: Icon(Icons.password),
-                          hintStyle: TextStyle(color: color.AppColor.textFieldHintColor),
+                          hintStyle: TextStyle(
+                              color: color.AppColor.textFieldHintColor),
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
@@ -156,5 +191,23 @@ class _registerState extends State<register> {
         ),
       ),
     );
+  }
+
+  Future<void> _pickImageFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(
+        () => this._imageFile = File(pickedFile.path),
+      );
+    }
+  }
+
+  Future<void> _pickImageFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(
+        () => this._imageFile = File(pickedFile.path),
+      );
+    }
   }
 }
