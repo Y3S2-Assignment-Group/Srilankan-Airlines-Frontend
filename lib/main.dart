@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/screens/Login/Login.dart';
+import 'package:srilankan_airline/screens/Payment/payment.dart';
 import 'package:srilankan_airline/screens/Register/Register.dart';
 import 'package:srilankan_airline/screens/bookflight/flightbook.dart';
 import 'package:srilankan_airline/screens/checkin/checkin.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => dashboard(),
         '/previousTrips': (context) => previousTrips(),
         '/checkin': (context) => checkin(),
+        '/payment': (context) => payment(),
       },
     );
   }

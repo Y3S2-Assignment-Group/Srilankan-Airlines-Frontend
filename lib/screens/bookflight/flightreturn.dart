@@ -239,10 +239,7 @@ class _returnFlightState extends State<returnFlight> {
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
                 onPressed: () {
-                  //Navigator.push(
-                  //context,
-                  //MaterialPageRoute(builder: (context) => seatbook()),
-                  //);
+                  Navigator.pushNamed(context, '/payment');
                 },
                 minWidth: 200.0,
                 height: 45.0,
