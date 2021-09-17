@@ -145,7 +145,7 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(12.0),
                           child: MaterialButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/mytrips');
+                              Navigator.pushNamed(context, '/checkin');
 
                             },
                             minWidth: 200.0,
