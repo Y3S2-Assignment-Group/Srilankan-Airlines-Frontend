@@ -224,10 +224,7 @@ class _onewayFlightState extends State<onewayFlight> {
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
                 onPressed: () {
-                  //Navigator.push(
-                  //context,
-                  //MaterialPageRoute(builder: (context) => seatbook()),
-                  //);
+                  Navigator.pushNamed(context, '/recipt');
                 },
                 minWidth: 200.0,
                 height: 45.0,

@@ -8,6 +8,7 @@ import 'package:srilankan_airline/screens/dashboard/dashboard.dart';
 import 'package:srilankan_airline/screens/myTrips/mytrips.dart';
 import 'package:srilankan_airline/screens/previousTrips/previousTrips.dart';
 import 'package:srilankan_airline/screens/profile/profile.dart';
+import 'package:srilankan_airline/screens/recipt/confirmationrecipt.dart';
 import 'package:srilankan_airline/screens/scheduleTrips/scheduleTrips.dart';
 import 'package:srilankan_airline/screens/splashScreen.dart';
 
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/previousTrips': (context) => previousTrips(),
         '/checkin': (context) => checkin(),
         '/payment': (context) => payment(),
+        '/recipt': (context) => recipt(),
       },
     );
   }
