@@ -13,7 +13,7 @@ class _FlightsListState extends State<FlightsList> {
     return Scaffold(
       body: Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Colors.grey.shade200,
@@ -25,6 +25,7 @@ class _FlightsListState extends State<FlightsList> {
                 return Container(
                   height: 50,
                   padding: const EdgeInsets.all(5),
+                  margin: const EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
                       border: Border(
                     bottom: BorderSide(

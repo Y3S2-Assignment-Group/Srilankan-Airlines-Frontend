@@ -13,6 +13,7 @@ import 'package:srilankan_airline/screens/previousTrips/previousTrips.dart';
 import 'package:srilankan_airline/screens/profile/profile.dart';
 import 'package:srilankan_airline/screens/recipt/confirmationrecipt.dart';
 import 'package:srilankan_airline/screens/scheduleTrips/scheduleTrips.dart';
+import 'package:srilankan_airline/screens/seats/seats.dart';
 import 'package:srilankan_airline/screens/splashScreen.dart';
 
 void main() {
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/offers': (context) => Offers(),
         '/feedback': (context) => feedback(),
         '/flights': (context) => Flights(),
+        '/seats': (context) => Seats(),
       },
     );
   }

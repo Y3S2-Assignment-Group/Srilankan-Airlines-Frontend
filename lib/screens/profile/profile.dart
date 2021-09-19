@@ -52,7 +52,12 @@ class _ProfileState extends State<Profile> {
                       SizedBox(
                         width: 10,
                       ),
-                      Text('Search Flight')
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/seats');
+                        },
+                        child: const Text('seats'),
+                      )
                     ],
                   )),
                   PopupMenuItem(
