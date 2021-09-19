@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
 import '../../Util/colors.dart' as color;
 
@@ -19,22 +20,73 @@ class _ProfileState extends State<Profile> {
             height: 70,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              Lottie.asset('assets/images/appbarlottie.json', width: 60),
               Text(
                 "My Profile",
                 style: TextStyle(color: Color(0xFF969696), fontSize: 20),
-              )
+              ),
+              PopupMenuButton(itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    child: Row(
+                      children: [
+                        Icon(Icons.flight),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/flights');
+                          },
+                          child: const Text('ADD'),
+                        )
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                      child: Row(
+                    children: [
+                      Icon(Icons.flight),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Search Flight')
+                    ],
+                  )),
+                  PopupMenuItem(
+                      child: Row(
+                    children: [
+                      Icon(Icons.flight),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Search Flight')
+                    ],
+                  )),
+                  PopupMenuItem(
+                      child: Row(
+                    children: [
+                      Icon(Icons.flight),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Search Flight')
+                    ],
+                  )),
+                ];
+              })
             ],
           ),
           SizedBox(
-            height: 30,
+            height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
-                  radius: 90,
+                  radius: 80,
                   backgroundImage: NetworkImage(
                       'https://th.bing.com/th/id/OIP.8ywzf72LxkfVNzP5k_Ya2gHaHa?w=206&h=206&c=7&r=0&o=5&dpr=1.25&pid=1.7'))
             ],
@@ -146,7 +198,11 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(12.0),
                           child: MaterialButton(
                             onPressed: () {
+<<<<<<< HEAD
                               Navigator.pushNamed(context, '/mytrips');
+=======
+                              Navigator.pushNamed(context, '/checkin');
+>>>>>>> 556ea2fd9d7ae8e2b182e88a0c1ad0c790a5955a
                             },
                             minWidth: 200.0,
                             height: 45.0,
