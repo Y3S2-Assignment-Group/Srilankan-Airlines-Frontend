@@ -25,7 +25,7 @@ class _bookaflightState extends State<bookaflight>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigation(selIndex:1),
+      bottomNavigationBar: BottomNavigation(selIndex: 1),
       body: Container(
         child: Column(
           children: [
@@ -33,7 +33,6 @@ class _bookaflightState extends State<bookaflight>
               height: 50,
             ),
             appbar(),
-            
             TabBar(
               unselectedLabelColor: color.AppColor.tabunselectedColor,
               labelColor: color.AppColor.tabselectedColor,
