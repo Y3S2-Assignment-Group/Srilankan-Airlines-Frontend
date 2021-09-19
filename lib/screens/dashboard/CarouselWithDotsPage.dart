@@ -95,7 +95,7 @@ class _CarouselWithDotsPageState extends State<CarouselWithDotsPage> {
     return Column(
       children: [
         SizedBox(
-          height: 30,
+          height: 10,
         ),
         CarouselSlider(
           items: imageSliders,
@@ -118,7 +118,7 @@ class _CarouselWithDotsPageState extends State<CarouselWithDotsPage> {
               width: 6,
               height: 6,
               margin: EdgeInsets.symmetric(
-                vertical: 30,
+                vertical: 20,
                 horizontal: 3,
               ),
               decoration: BoxDecoration(
