@@ -30,16 +30,18 @@ class _ProfileState extends State<Profile> {
               PopupMenuButton(itemBuilder: (context) {
                 return [
                   PopupMenuItem(
-                    onTap: () {
-                        Navigator.pushNamed(context, '/feedback');
-                    },
                     child: Row(
                       children: [
                         Icon(Icons.flight),
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Feedback')
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/flights');
+                          },
+                          child: const Text('ADD'),
+                        )
                       ],
                     ),
                   ),
