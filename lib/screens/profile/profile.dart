@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
 import '../../Util/colors.dart' as color;
+
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
 
@@ -145,8 +146,7 @@ class _ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(12.0),
                           child: MaterialButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/checkin');
-
+                              Navigator.pushNamed(context, '/mytrips');
                             },
                             minWidth: 200.0,
                             height: 45.0,
