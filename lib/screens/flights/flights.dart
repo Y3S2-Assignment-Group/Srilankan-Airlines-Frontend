@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:srilankan_airline/screens/flights/flightlist.dart';
 
 class Flights extends StatefulWidget {
   const Flights({Key? key}) : super(key: key);
@@ -12,7 +13,15 @@ class _FlightsState extends State<Flights> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        child: Text("data"),
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              decoration: BoxDecoration(color: Colors.red),
+            ),
+            Expanded(child: FlightsList())
+          ],
+        ),
       ),
     );
   }
