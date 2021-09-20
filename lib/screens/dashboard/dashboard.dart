@@ -15,7 +15,7 @@ class _dashboardState extends State<dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigation(selIndex:0),
+      bottomNavigationBar: BottomNavigation(selIndex: 0),
       body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -35,7 +35,6 @@ class _dashboardState extends State<dashboard> {
                     height: 50,
                   ),
                   appbar(),
-                  
                   CarouselWithDotsPage(),
                 ],
               ),

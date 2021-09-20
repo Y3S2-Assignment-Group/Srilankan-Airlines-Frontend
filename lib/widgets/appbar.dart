@@ -29,15 +29,16 @@ class _appbarState extends State<appbar> {
                 PopupMenuButton(itemBuilder: (context) {
                   return [
                     PopupMenuItem(
+                        enabled: true,
                         child: Row(
-                      children: [
-                        Icon(Icons.flight),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Search Flight')
-                      ],
-                    )),
+                          children: [
+                            Icon(Icons.flight),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text('Search Flight')
+                          ],
+                        )),
                     PopupMenuItem(
                         child: Row(
                       children: [
