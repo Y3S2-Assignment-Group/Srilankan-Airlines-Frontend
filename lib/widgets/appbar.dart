@@ -29,7 +29,11 @@ class _appbarState extends State<appbar> {
                 PopupMenuButton(itemBuilder: (context) {
                   return [
                     PopupMenuItem(
-                        child: ElevatedButton(
+                        child: TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                      ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/flights');
                       },
@@ -39,28 +43,42 @@ class _appbarState extends State<appbar> {
                       ]),
                     )),
                     PopupMenuItem(
-                        child: ElevatedButton(
+                        child: TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                      ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/offers');
                       },
-                      child:
-                          Row(children: [Icon(Icons.flight), Text('Offers')]),
+                      child: Row(children: [
+                        Icon(Icons.airplane_ticket),
+                        Text('Offers')
+                      ]),
                     )),
                     PopupMenuItem(
-                        child: ElevatedButton(
+                        child: TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                      ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/feedback');
                       },
-                      child:
-                          Row(children: [Icon(Icons.flight), Text('Feedback')]),
+                      child: Row(
+                          children: [Icon(Icons.feedback), Text('Feedback')]),
                     )),
                     PopupMenuItem(
-                        child: ElevatedButton(
+                        child: TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                      ),
                       onPressed: () {
                         Navigator.pushNamed(context, '');
                       },
                       child:
-                          Row(children: [Icon(Icons.flight), Text('Logout')]),
+                          Row(children: [Icon(Icons.logout), Text('Logout')]),
                     )),
                   ];
                 })
