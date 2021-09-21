@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
 import '../../Util/colors.dart' as color;
@@ -22,71 +21,6 @@ class _ProfileState extends State<Profile> {
               height: 60,
             ),
             appbar(),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     Lottie.asset('assets/images/appbarlottie.json', width: 60),
-            //     Text(
-            //       "My Profile",
-            //       style: TextStyle(color: Color(0xFF969696), fontSize: 20),
-            //     ),
-            //     PopupMenuButton(itemBuilder: (context) {
-            //       return [
-            //         PopupMenuItem(
-            //           child: Row(
-            //             children: [
-            //               Icon(Icons.flight),
-            //               SizedBox(
-            //                 width: 10,
-            //               ),
-            //               ElevatedButton(
-            //                 onPressed: () {
-            //                   Navigator.pushNamed(context, '/flights');
-            //                 },
-            //                 child: const Text('ADD'),
-            //               )
-            //             ],
-            //           ),
-            //         ),
-            //         PopupMenuItem(
-            //             child: Row(
-            //           children: [
-            //             Icon(Icons.flight),
-            //             SizedBox(
-            //               width: 10,
-            //             ),
-            //             ElevatedButton(
-            //               onPressed: () {
-            //                 Navigator.pushNamed(context, '/seats');
-            //               },
-            //               child: const Text('seats'),
-            //             )
-            //           ],
-            //         )),
-            //         PopupMenuItem(
-            //             child: Row(
-            //           children: [
-            //             Icon(Icons.flight),
-            //             SizedBox(
-            //               width: 10,
-            //             ),
-            //             Text('Search Flight')
-            //           ],
-            //         )),
-            //         PopupMenuItem(
-            //             child: Row(
-            //           children: [
-            //             Icon(Icons.flight),
-            //             SizedBox(
-            //               width: 10,
-            //             ),
-            //             Text('Search Flight')
-            //           ],
-            //         )),
-            //       ];
-            //     })
-            //   ],
-            // ),
             SizedBox(
               height: 20,
             ),
