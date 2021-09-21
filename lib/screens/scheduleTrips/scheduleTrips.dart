@@ -254,6 +254,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
               ),
               Container(
                 height: 50,
+                padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Material(
                   elevation: 2,
                   color: color.AppColor.buttonColor,
@@ -262,13 +263,13 @@ class _scheduleTripsState extends State<scheduleTrips> {
                     onPressed: () {
                       Navigator.pushNamed(context, '/mytrips');
                     },
-                    minWidth: 200.0,
+                    minWidth: MediaQuery.of(context).size.width,
                     height: 45.0,
                     child: Text(
                       "Schedule",
                       style: TextStyle(
                           color: color.AppColor.buttonTextColor,
-                          fontSize: 25.0),
+                          fontSize: 22.0),
                     ),
                   ),
                 ),
