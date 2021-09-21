@@ -239,7 +239,7 @@ class _returnFlightState extends State<returnFlight> {
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/offers');
+                  Navigator.pushNamed(context, '/seats');
                 },
                 minWidth: 200.0,
                 height: 45.0,

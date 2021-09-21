@@ -29,44 +29,37 @@ class _appbarState extends State<appbar> {
                 PopupMenuButton(itemBuilder: (context) {
                   return [
                     PopupMenuItem(
-                        enabled: true,
-                        child: Row(
-                          children: [
-                            Icon(Icons.flight),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('Search Flight')
-                          ],
-                        )),
+                        child: ButtonBar(
+                      children: [Icon(Icons.flight), Text('Search Flight')],
+                    )),
                     PopupMenuItem(
                         child: Row(
                       children: [
-                        Icon(Icons.flight),
+                        Icon(Icons.airplane_ticket),
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Search Flight')
+                        Text('Offers')
                       ],
                     )),
                     PopupMenuItem(
                         child: Row(
                       children: [
-                        Icon(Icons.flight),
+                        Icon(Icons.feedback),
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Search Flight')
+                        Text('Feedback')
                       ],
                     )),
                     PopupMenuItem(
                         child: Row(
                       children: [
-                        Icon(Icons.flight),
+                        Icon(Icons.logout),
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Search Flight')
+                        Text('Logout')
                       ],
                     )),
                   ];

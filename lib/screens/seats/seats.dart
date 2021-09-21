@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
 import 'package:srilankan_airline/screens/seats/seatsgrid.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
+import '../../Util/colors.dart' as color;
 
 class Seats extends StatefulWidget {
   const Seats({Key? key}) : super(key: key);
@@ -46,10 +47,30 @@ class _SeatsState extends State<Seats> {
                 ],
               ),
             ),
-          )
+          ),
+          Center(
+            child: Material(
+              elevation: 2,
+              color: color.AppColor.buttonColor,
+              borderRadius: BorderRadius.circular(12.0),
+              child: MaterialButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/seats');
+                },
+                minWidth: 200.0,
+                height: 45.0,
+                child: Text(
+                  "Book",
+                  style: TextStyle(
+                      color: color.AppColor.buttonTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
-      bottomNavigationBar: BottomNavigation(selIndex: 3),
     );
   }
 }
