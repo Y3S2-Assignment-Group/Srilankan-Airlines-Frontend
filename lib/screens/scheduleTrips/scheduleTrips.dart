@@ -249,6 +249,33 @@ class _scheduleTripsState extends State<scheduleTrips> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 50,
+                child: Material(
+                  elevation: 2,
+                  color: color.AppColor.buttonColor,
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: MaterialButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/mytrips');
+                    },
+                    minWidth: 200.0,
+                    height: 45.0,
+                    child: Text(
+                      "Schedule",
+                      style: TextStyle(
+                          color: color.AppColor.buttonTextColor,
+                          fontSize: 25.0),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 height: 200,
                 child: Expanded(
