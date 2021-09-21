@@ -29,38 +29,38 @@ class _appbarState extends State<appbar> {
                 PopupMenuButton(itemBuilder: (context) {
                   return [
                     PopupMenuItem(
-                        child: ButtonBar(
-                      children: [Icon(Icons.flight), Text('Search Flight')],
+                        child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/flights');
+                      },
+                      child: Row(children: [
+                        Icon(Icons.flight),
+                        Text('Search Flight')
+                      ]),
                     )),
                     PopupMenuItem(
-                        child: Row(
-                      children: [
-                        Icon(Icons.airplane_ticket),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Offers')
-                      ],
+                        child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/offers');
+                      },
+                      child:
+                          Row(children: [Icon(Icons.flight), Text('Offers')]),
                     )),
                     PopupMenuItem(
-                        child: Row(
-                      children: [
-                        Icon(Icons.feedback),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Feedback')
-                      ],
+                        child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/feedback');
+                      },
+                      child:
+                          Row(children: [Icon(Icons.flight), Text('Feedback')]),
                     )),
                     PopupMenuItem(
-                        child: Row(
-                      children: [
-                        Icon(Icons.logout),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Logout')
-                      ],
+                        child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '');
+                      },
+                      child:
+                          Row(children: [Icon(Icons.flight), Text('Logout')]),
                     )),
                   ];
                 })
