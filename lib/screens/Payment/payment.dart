@@ -161,7 +161,7 @@ class _paymentState extends State<payment> {
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/home');
+                  Navigator.pushNamed(context, '/recipt');
                 },
                 minWidth: 200.0,
                 height: 45.0,

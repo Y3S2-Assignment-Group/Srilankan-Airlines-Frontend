@@ -109,11 +109,15 @@ class previousTripsList extends StatelessWidget {
                           ],
                         ),
                         Expanded(child: Container()),
-                        Icon(
-                          Icons.flight,
-                          color: color.AppColor.buttonColor,
-                          size: 40,
-                        )
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/previousTrips');
+                            },
+                            icon: Icon(
+                              Icons.flight,
+                              color: color.AppColor.buttonColor,
+                              size: 40,
+                            ))
                       ],
                     ),
                   ),
