@@ -121,7 +121,7 @@ class _checkinState extends State<checkin> {
             ),
             Container(
               margin: EdgeInsets.only(left: 30, right: 30),
-              height: 400,
+              height: 450,
               width: 500,
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Expanded(
@@ -275,7 +275,9 @@ class _checkinState extends State<checkin> {
                             ]),
                       ],
                     ),
-                    SizedBox(height: 30,),
+                    SizedBox(
+                      height: 30,
+                    ),
                     TextFormField(
                       keyboardType: TextInputType.text,
                       textAlign: TextAlign.left,
@@ -289,7 +291,9 @@ class _checkinState extends State<checkin> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     TextFormField(
                       keyboardType: TextInputType.text,
                       textAlign: TextAlign.left,
@@ -302,6 +306,30 @@ class _checkinState extends State<checkin> {
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(9.0)))),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                      child: Material(
+                        elevation: 2,
+                        color: color.AppColor.buttonColor,
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/seats');
+                          },
+                          minWidth: 200.0,
+                          height: 45.0,
+                          child: Text(
+                            "Check In",
+                            style: TextStyle(
+                                color: color.AppColor.buttonTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
