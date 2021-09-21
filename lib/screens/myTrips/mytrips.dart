@@ -89,17 +89,33 @@ class previousTripsList extends StatelessWidget {
                   title: Container(
                     margin: EdgeInsets.only(bottom: 2, top: 2),
                     height: 100,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Row(
                       children: [
-                        Center(child: Text('Entry ${entries[index]}')),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Colombo - London',
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              '02-09-2017',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                        Expanded(child: Container()),
+                        Icon(
+                          Icons.flight,
+                          color: color.AppColor.buttonColor,
+                          size: 40,
+                        )
                       ],
                     ),
-                  ),
-                  trailing: Icon(
-                    Icons.flight,
-                    color: color.AppColor.buttonColor,
-                    size: 40,
                   ),
                 ),
               );
@@ -277,7 +293,7 @@ class CurrentTrips extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/feedback');
+                    Navigator.pushNamed(context, '/checkin');
                   },
                   minWidth: 200.0,
                   height: 30.0,
