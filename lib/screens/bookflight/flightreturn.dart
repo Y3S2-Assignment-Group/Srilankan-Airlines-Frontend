@@ -10,6 +10,8 @@ class returnFlight extends StatefulWidget {
 }
 
 class _returnFlightState extends State<returnFlight> {
+  String dropdownValue1 = 'Doha DHO';
+  String dropdownValue2 = 'Doha DHO';
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,29 +42,44 @@ class _returnFlightState extends State<returnFlight> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                  "Doha",
-                                  style: TextStyle(
+                                DropdownButton<String>(
+                                  value: dropdownValue1,
+                                  icon: const Icon(Icons.arrow_downward),
+                                  iconSize: 20,
+                                  elevation: 16,
+                                  style: const TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: color.AppColor.airportColor),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "DHO",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: color.AppColor.airportabrColor),
+                                      color: Colors.blue),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownValue1 = newValue!;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Doha DHO',
+                                    'Colombo COL',
+                                    'DHO Doha',
+                                    'COL Colombo'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Column(
+                                        children: [
+                                          Text(value),
+                                          Text(
+                                            "Hamad international airport",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ],
-                            ),
-                            Text(
-                              "Hamad international airport",
-                              style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -91,29 +108,44 @@ class _returnFlightState extends State<returnFlight> {
                             ),
                             Row(
                               children: [
-                                Text(
-                                  "Colombo",
-                                  style: TextStyle(
+                                DropdownButton<String>(
+                                  value: dropdownValue2,
+                                  icon: const Icon(Icons.arrow_downward),
+                                  iconSize: 20,
+                                  elevation: 16,
+                                  style: const TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: color.AppColor.airportColor),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "COL",
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: color.AppColor.airportabrColor),
+                                      color: Colors.blue),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownValue2 = newValue!;
+                                    });
+                                  },
+                                  items: <String>[
+                                    'Doha DHO',
+                                    'Colombo COL',
+                                    'DHO Doha',
+                                    'COL Colombo'
+                                  ].map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Column(
+                                        children: [
+                                          Text(value),
+                                          Text(
+                                            "Bandaranayake International airport",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ],
-                            ),
-                            Text(
-                              "Katunayake international airport",
-                              style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
