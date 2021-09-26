@@ -19,41 +19,49 @@ class _OfferlistState extends State<Offerlist> {
               padding: EdgeInsets.only(top: 50, bottom: 10, right: 20),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        child: Center(
-                          child: Text(
-                            "50%",
-                            style: TextStyle(
-                                color: Color(0xFF434343),
-                                fontSize: 30,
-                                fontWeight: FontWeight.w600),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/singleoffer');
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          child: Center(
+                            child: Text(
+                              "50%",
+                              style: TextStyle(
+                                  color: Color(0xFF434343),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          height: 75,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.5),
                           ),
                         ),
-                        height: 75,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.5),
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            "From",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          Text("Colombo",
+                        Expanded(child: Container()),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              "From",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.w700))
-                        ],
-                      )
-                    ],
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            Text("Colombo",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w700))
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
