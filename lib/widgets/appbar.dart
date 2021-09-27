@@ -20,7 +20,8 @@ class _appbarState extends State<appbar> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Lottie.asset('assets/images/appbarlottie.json', width: 80),
+                SizedBox(height: 10,),
+                Lottie.asset('assets/images/appbarlottie.json', width: 60),
               ],
             ),
             Column(

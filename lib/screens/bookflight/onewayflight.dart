@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:srilankan_airline/screens/bookflight/flightSeatbook.dart';
+import 'package:flutter/cupertino.dart';
 import '../../Util/colors.dart' as color;
 
 class onewayFlight extends StatefulWidget {
@@ -10,8 +10,144 @@ class onewayFlight extends StatefulWidget {
 }
 
 class _onewayFlightState extends State<onewayFlight> {
-  String dropdownValue1 = 'Doha DHO';
-  String dropdownValue2 = 'Doha DHO';
+  //date varibles
+  DateTime dateDeparture = DateTime.now();
+  DateTime dateArival = DateTime.now();
+
+//Place variables
+  int departureIndex = 0;
+  int arivalIndex = 0;
+
+  static List<String> departureDest = [
+    'Colombo Srilanka',
+    'Doha Quatar',
+    'Kolkata India',
+    'Colombo Srilanka',
+    'Doha Quatar',
+    'Kolkata India'
+  ];
+
+  static List<String> arivalDest = [
+    'Doha Quatar',
+    'Colombo Srilanka',
+    'Kolkata India',
+    'Colombo Srilanka',
+    'Doha Quatar',
+    'Kolkata India'
+  ];
+
+  //class variables
+  int classIndex = 0;
+
+  static List<String> classSel = ['Economy', 'Business'];
+
+//date functions
+  static void showSheet(BuildContext context,
+          {required Widget child, required VoidCallback onClicked}) =>
+      showCupertinoModalPopup(
+          context: context,
+          builder: (context) => CupertinoActionSheet(
+                actions: [child],
+                cancelButton: CupertinoActionSheetAction(
+                  child: Text('Done'),
+                  onPressed: onClicked,
+                ),
+              ));
+
+  Widget buildDatePickerDeparture() => SizedBox(
+        height: 300,
+        child: CupertinoDatePicker(
+            initialDateTime: dateDeparture,
+            mode: CupertinoDatePickerMode.date,
+            onDateTimeChanged: (pickedDate) {
+              setState(() {
+                this.dateDeparture = pickedDate;
+              });
+            }),
+      );
+
+  Widget buildDatePickerArival() => SizedBox(
+        height: 300,
+        child: CupertinoDatePicker(
+            initialDateTime: dateArival,
+            mode: CupertinoDatePickerMode.date,
+            onDateTimeChanged: (pickedDate) {
+              setState(() {
+                this.dateArival = pickedDate;
+              });
+            }),
+      );
+
+  //destination pickers
+  Widget buildDeparturePicker() => SizedBox(
+        height: 300,
+        child: CupertinoPicker(
+          itemExtent: 60,
+          onSelectedItemChanged: (index) {
+            setState(() {
+              this.departureIndex = index;
+            });
+          },
+          children: modelBuilder<String>(departureDest, (index, value) {
+            return Center(
+              child: Text(
+                value,
+                style: TextStyle(color: Colors.black, fontSize: 24),
+              ),
+            );
+          }),
+        ),
+      );
+
+  Widget buildArivalPicker() => SizedBox(
+        height: 300,
+        child: CupertinoPicker(
+          itemExtent: 60,
+          onSelectedItemChanged: (index) {
+            setState(() {
+              this.arivalIndex = index;
+            });
+          },
+          children: modelBuilder<String>(arivalDest, (index, value) {
+            return Center(
+              child: Text(
+                value,
+                style: TextStyle(color: Colors.black, fontSize: 24),
+              ),
+            );
+          }),
+        ),
+      );
+
+  //classSelPicker
+  Widget buildClassPicker() => SizedBox(
+        height: 300,
+        child: CupertinoPicker(
+          itemExtent: 60,
+          onSelectedItemChanged: (index) {
+            setState(() {
+              this.classIndex = index;
+            });
+          },
+          children: modelBuilder<String>(classSel, (index, value) {
+            return Center(
+              child: Text(
+                value,
+                style: TextStyle(color: Colors.black, fontSize: 24),
+              ),
+            );
+          }),
+        ),
+      );
+
+  static List<Widget> modelBuilder<M>(
+          List<M> models, Widget Function(int index, M model) builder) =>
+      models
+          .asMap()
+          .map<int, Widget>(
+              (index, model) => MapEntry(index, builder(index, model)))
+          .values
+          .toList();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,43 +178,23 @@ class _onewayFlightState extends State<onewayFlight> {
                             ),
                             Row(
                               children: [
-                                DropdownButton<String>(
-                                  value: dropdownValue1,
-                                  icon: const Icon(Icons.arrow_downward),
-                                  iconSize: 20,
-                                  elevation: 16,
-                                  style: const TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropdownValue1 = newValue!;
+                                CupertinoButton(
+                                  padding: EdgeInsets.all(0),
+                                  onPressed: () {
+                                    showSheet(context,
+                                        child: buildDeparturePicker(),
+                                        onClicked: () {
+                                      Navigator.pop(context);
                                     });
                                   },
-                                  items: <String>[
-                                    'Doha DHO',
-                                    'Colombo COL',
-                                    'DHO Doha',
-                                    'COL Colombo'
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Column(
-                                        children: [
-                                          Text(value),
-                                          Text(
-                                            "Hamad international airport",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
+                                  child: Text(
+                                    "${departureDest[departureIndex]}",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                  ),
+                                )
                               ],
                             ),
                           ],
@@ -108,42 +224,23 @@ class _onewayFlightState extends State<onewayFlight> {
                             ),
                             Row(
                               children: [
-                                DropdownButton<String>(
-                                  value: dropdownValue2,
-                                  iconSize: 20,
-                                  elevation: 16,
-                                  style: const TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropdownValue2 = newValue!;
+                                CupertinoButton(
+                                  padding: EdgeInsets.all(0),
+                                  onPressed: () {
+                                    showSheet(context,
+                                        child: buildArivalPicker(),
+                                        onClicked: () {
+                                      Navigator.pop(context);
                                     });
                                   },
-                                  items: <String>[
-                                    'Doha DHO',
-                                    'Colombo COL',
-                                    'DHO Doha',
-                                    'COL Colombo'
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Column(
-                                        children: [
-                                          Text(value),
-                                          Text(
-                                            "Bandaranayake International airport",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
+                                  child: Text(
+                                    "${arivalDest[arivalIndex]}",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                  ),
+                                )
                               ],
                             ),
                           ],
@@ -184,14 +281,51 @@ class _onewayFlightState extends State<onewayFlight> {
                                   "Departure",
                                   style: TextStyle(fontSize: 15),
                                 ),
-                                Text(
-                                  "13 Aug 2021",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                CupertinoButton(
+                                  padding: EdgeInsets.all(0),
+                                  onPressed: () {
+                                    showSheet(context,
+                                        child: buildDatePickerDeparture(),
+                                        onClicked: () {
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                  child: Text(
+                                    "${dateDeparture.year} - ${dateDeparture.month} - ${dateDeparture.day}",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                )
                               ],
                             ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Return",
+                                  style: TextStyle(fontSize: 15),
+                                ),
+                                CupertinoButton(
+                                  padding: EdgeInsets.all(0),
+                                  onPressed: () {
+                                    showSheet(context,
+                                        child: buildDatePickerArival(),
+                                        onClicked: () {
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                  child: Text(
+                                    "${dateArival.year} - ${dateArival.month} - ${dateArival.day}",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                )
+                              ],
+                            )
                           ],
                         ),
                       )),
@@ -217,7 +351,7 @@ class _onewayFlightState extends State<onewayFlight> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "2 passenger",
+                                  "1 passenger",
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -227,13 +361,23 @@ class _onewayFlightState extends State<onewayFlight> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text(
-                                  "Economy",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff018bef)),
-                                ),
+                                CupertinoButton(
+                                  padding: EdgeInsets.all(0),
+                                  onPressed: () {
+                                    showSheet(context,
+                                        child: buildClassPicker(),
+                                        onClicked: () {
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                  child: Text(
+                                    "${classSel[classIndex]}",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                  ),
+                                )
                               ],
                             )
                           ],
@@ -255,14 +399,14 @@ class _onewayFlightState extends State<onewayFlight> {
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/seat');
+                  Navigator.pushNamed(context, '/seats');
                 },
                 minWidth: 200.0,
                 height: 45.0,
                 child: Text(
                   "Book Flight",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: color.AppColor.buttonTextColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 20.0),
                 ),
