@@ -9,26 +9,25 @@ class SeatSelection extends StatefulWidget {
 }
 
 class _SeatSelectionState extends State<SeatSelection> {
+  var _chairStatus = [
+    [2, 2, 2, 2, 2, 2, 2],
+    [1, 1, 1, 1, 3, 1, 1],
+    [1, 1, 1, 1, 1, 3, 3],
+    [2, 2, 2, 1, 3, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+  ];
   Widget _seatList() {
     Size size = MediaQuery.of(context).size;
 
     // 1 is free seats
     // 2 is selected seats
     // 3 is reserved seats
-
-    var _chairStatus = [
-      [2, 2, 2, 2, 2, 2, 2],
-      [1, 1, 1, 1, 3, 1, 1],
-      [1, 1, 1, 1, 1, 3, 3],
-      [2, 2, 2, 1, 3, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1],
-    ];
 
     return Container(
       child: Column(
@@ -54,9 +53,23 @@ class _SeatSelectionState extends State<SeatSelection> {
                               height: size.width / 11 - 10,
                               margin: EdgeInsets.all(5),
                               child: _chairStatus[i][x - 1] == 1
-                                  ? BuildChairs.availableChair()
+                                  ? InkWell(
+                                      child: BuildChairs.availableChair(),
+                                      onTap: () {
+                                        setState(() {
+                                          this._chairStatus[i][x - 1] = 2;
+                                        });
+                                      },
+                                    )
                                   : _chairStatus[i][x - 1] == 2
-                                      ? BuildChairs.selectedChair()
+                                      ? InkWell(
+                                          child: BuildChairs.selectedChair(),
+                                          onTap: () {
+                                            setState(() {
+                                              this._chairStatus[i][x - 1] = 1;
+                                            });
+                                          },
+                                        )
                                       : BuildChairs.reservedChair(),
                             ),
                     ),
@@ -73,6 +86,105 @@ class _SeatSelectionState extends State<SeatSelection> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 200,
+            width: 450,
+            decoration: BoxDecoration(
+                // color: Color(0xFFE8E8E8),
+                border: Border.all(color: Colors.blueAccent, width: 5),
+                borderRadius: BorderRadius.circular(25)),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(
+                          top: 30, bottom: 30, left: 20, right: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome ! to your seat",
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                height: 20.0,
+                                width: 20.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(6.0)),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text("Selected Seats: ")
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                height: 20.0,
+                                width: 20.0,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(6.0)),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text("Available Seats: ")
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Container(
+                                height: 20.0,
+                                width: 20.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(6.0)),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text("Unavailable Seats: ")
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        "assets/images/planeSeat.png",
+                        width: 150.0,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
           SizedBox(
             height: 20,
           ),
