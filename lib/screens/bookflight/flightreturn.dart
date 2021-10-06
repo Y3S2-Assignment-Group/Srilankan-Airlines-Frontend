@@ -35,13 +35,30 @@ class _returnFlightState extends State<returnFlight> {
     'Toronto Canada',
     'Jakarta Indonisia',
     'Tokyo Japan',
-    
   ];
 
   //class variables
   int classIndex = 0;
 
   static List<String> classSel = ['Economy', 'Business'];
+
+  void bookAndMove() {
+    context.read<CustomerProvider>().setArival(arivalDest[arivalIndex]);
+    context
+        .read<CustomerProvider>()
+        .setDeparture(departureDest[departureIndex]);
+    context.read<CustomerProvider>().setArivalDate(dateArival.toString());
+    context.read<CustomerProvider>().setDepartureDate(dateDeparture.toString());
+    context.read<CustomerProvider>().setFlightClass(classSel[classIndex]);
+
+    print(context.read<CustomerProvider>().getArival());
+    print(context.read<CustomerProvider>().getDeparture());
+    print(context.read<CustomerProvider>().getDepartureDate());
+    print(context.read<CustomerProvider>().getArivalDate());
+    print(context.read<CustomerProvider>().getFlightClass());
+
+    Navigator.pushNamed(context, '/seats');
+  }
 
 //date functions
   static void showSheet(BuildContext context,
@@ -129,7 +146,6 @@ class _returnFlightState extends State<returnFlight> {
           onSelectedItemChanged: (index) {
             setState(() {
               this.classIndex = index;
-              context.read<CustomerProvider>().setFlightClass(classSel[index]);
             });
           },
           children: modelBuilder<String>(classSel, (index, value) {
@@ -151,10 +167,11 @@ class _returnFlightState extends State<returnFlight> {
               (index, model) => MapEntry(index, builder(index, model)))
           .values
           .toList();
+
   @override
   void initState() {
     flightList = context.read<FlightProvider>().getFlightList();
-    
+
     // TODO: implement initState
     super.initState();
   }
@@ -408,22 +425,20 @@ class _returnFlightState extends State<returnFlight> {
           //         builder: (context, snapshot) {
           //           if (snapshot.hasData) {
           //             // ignore: avoid_print
-          //             return Text(snapshot.data![0].arrival);
+          //             return Text(snapshot.data![0].arrival);~~
           //           } else if (snapshot.hasError) {
           //             return Text('data');
           //           }
           //           return const Text('');
           //         }),
-            
+
           Center(
             child: Material(
               elevation: 2,
               color: color.AppColor.buttonColor,
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/seats');
-                },
+                onPressed: bookAndMove,
                 minWidth: 200.0,
                 height: 45.0,
                 child: Text(
