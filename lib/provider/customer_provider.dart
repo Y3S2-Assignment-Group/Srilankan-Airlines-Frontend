@@ -15,27 +15,20 @@ class CustomerProvider with ChangeNotifier {
   String mobileNumber = '';
   String password = '';
 
+  String flightID = '';
+  String departure = '';
+  String arival = '';
+  String departureDate = '';
+  String arivalDate = '';
   String flightClass = '';
-  var chairStatus = [
-    [2, 2, 2, 2, 2, 2, 2],
-    [1, 1, 1, 1, 3, 1, 1],
-    [1, 1, 1, 1, 1, 3, 3],
-    [2, 2, 2, 1, 3, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-  ];
+  String seatNo = '';
 
-  void setChairStatus(var seattStatus) {
-    this.chairStatus = seattStatus;
+  void setSeatNo(String seat) {
+    this.seatNo = seat;
   }
 
-  dynamic getChairStatus() {
-    return this.chairStatus;
+  dynamic getSeatNo() {
+    return this.seatNo;
   }
 
   void setFlightClass(String fclass) {
@@ -44,6 +37,38 @@ class CustomerProvider with ChangeNotifier {
 
   String getFlightClass() {
     return this.flightClass;
+  }
+
+  void setDeparture(String departure) {
+    this.departure = departure;
+  }
+
+  String getDeparture() {
+    return this.departure;
+  }
+
+  void setArival(String arival) {
+    this.arival = arival;
+  }
+
+  String getArival() {
+    return this.arival;
+  }
+
+  void setDepartureDate(String departureDate) {
+    this.departureDate = departureDate;
+  }
+
+  String getDepartureDate() {
+    return this.departureDate;
+  }
+
+  void setArivalDate(String arivalDate) {
+    this.arivalDate = arivalDate;
+  }
+
+  String getArivalDate() {
+    return this.arivalDate;
   }
 
   String getToken() {
@@ -129,6 +154,7 @@ class CustomerProvider with ChangeNotifier {
       }),
     );
 
+    print(loginResponse.statusCode);
     if (loginResponse.statusCode == 200) {
       final data = jsonDecode(loginResponse.body);
       var customerData = Customer.fromJson(data);

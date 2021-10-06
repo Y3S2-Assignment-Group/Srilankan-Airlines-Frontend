@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+import 'package:srilankan_airline/provider/flights_provider.dart';
 import 'package:srilankan_airline/screens/seats/BuildSeats.dart';
 
 class SeatSelection extends StatefulWidget {
@@ -9,19 +11,8 @@ class SeatSelection extends StatefulWidget {
 }
 
 class _SeatSelectionState extends State<SeatSelection> {
-  var _chairStatus = [
-    [2, 2, 2, 2, 2, 2, 2],
-    [1, 1, 1, 1, 3, 1, 1],
-    [1, 1, 1, 1, 1, 3, 3],
-    [2, 2, 2, 1, 3, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1],
-  ];
+  List<List<int>> _chairStatus = [];
+
   Widget _seatList() {
     Size size = MediaQuery.of(context).size;
 
@@ -56,6 +47,10 @@ class _SeatSelectionState extends State<SeatSelection> {
                                   ? InkWell(
                                       child: BuildChairs.availableChair(),
                                       onTap: () {
+                                        context
+                                            .read<FlightProvider>()
+                                            .setSeatsList(_chairStatus);
+
                                         setState(() {
                                           this._chairStatus[i][x - 1] = 2;
                                         });
@@ -66,6 +61,9 @@ class _SeatSelectionState extends State<SeatSelection> {
                                           child: BuildChairs.selectedChair(),
                                           onTap: () {
                                             setState(() {
+                                              context
+                                                  .read<FlightProvider>()
+                                                  .setSeatsList(_chairStatus);
                                               this._chairStatus[i][x - 1] = 1;
                                             });
                                           },
@@ -79,6 +77,12 @@ class _SeatSelectionState extends State<SeatSelection> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
