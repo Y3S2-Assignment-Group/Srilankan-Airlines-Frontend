@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/src/provider.dart';
+import 'package:srilankan_airline/provider/customer_provider.dart';
 import 'package:srilankan_airline/screens/Register/Register.dart';
 import '../../Util/colors.dart' as color;
 
@@ -11,8 +13,25 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
-  final userName = TextEditingController();
-  final password = TextEditingController();
+  final emailText = TextEditingController();
+  final passwordText = TextEditingController();
+
+  void Login(){
+    if (context.read<CustomerProvider>().getEmail() != '' &&
+        context.read<CustomerProvider>().getPassword() != '') {
+      context.read<CustomerProvider>().login();
+      Navigator.pushNamed(context, '/home');
+    }
+  }
+
+  @override
+  void initState() {
+    context.read<CustomerProvider>().setEmail('');
+    context.read<CustomerProvider>().setPasswor('');
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,10 +70,13 @@ class _loginState extends State<login> {
                 TextFormField(
                   keyboardType: TextInputType.text,
                   textAlign: TextAlign.left,
-                  controller: userName,
+                  controller: emailText,
+                  onChanged: (ch) {
+                    context.read<CustomerProvider>().setEmail(ch);
+                  },
                   decoration: InputDecoration(
                       focusColor: color.AppColor.textFieldFocusColor,
-                      labelText: "UserName",
+                      labelText: "email",
                       prefixIcon: Icon(Icons.person),
                       hintStyle:
                           TextStyle(color: color.AppColor.textFieldHintColor),
@@ -66,9 +88,13 @@ class _loginState extends State<login> {
                   height: 20,
                 ),
                 TextFormField(
-                  keyboardType: TextInputType.text,
+                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
                   textAlign: TextAlign.left,
-                  controller: password,
+                  controller: passwordText,
+                  onChanged: (ch) {
+                    context.read<CustomerProvider>().setPasswor(ch);
+                  },
                   decoration: InputDecoration(
                       focusColor: color.AppColor.textFieldFocusColor,
                       labelText: "Password",
@@ -88,9 +114,7 @@ class _loginState extends State<login> {
                     color: color.AppColor.buttonColor,
                     borderRadius: BorderRadius.circular(12.0),
                     child: MaterialButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/home');
-                      },
+                      onPressed: Login,
                       minWidth: 200.0,
                       height: 45.0,
                       child: Text(

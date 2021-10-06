@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/src/provider.dart';
+import 'package:srilankan_airline/provider/flights_provider.dart';
 import '../../Util/colors.dart' as color;
 
 class returnFlight extends StatefulWidget {
@@ -148,6 +150,13 @@ class _returnFlightState extends State<returnFlight> {
               (index, model) => MapEntry(index, builder(index, model)))
           .values
           .toList();
+  @override
+  void initState() {
+    context.read<FlightProvider>().getFlightList();
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
