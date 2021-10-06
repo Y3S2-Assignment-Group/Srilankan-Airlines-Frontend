@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:srilankan_airline/model/user_model.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
+import 'package:srilankan_airline/provider/user_provider.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
 import '../../Util/colors.dart' as color;
+import 'package:provider/provider.dart';
 
 class myTrips extends StatefulWidget {
   myTrips({Key? key}) : super(key: key);
@@ -11,50 +14,58 @@ class myTrips extends StatefulWidget {
 }
 
 class _myTripsState extends State<myTrips> {
-  final List<String> entries = <String>[
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-  ];
+  late Future<User?> user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = context.read<UserProvider>().getUserProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            SizedBox(
-              height: 60,
-            ),
-            appbar(),
-            Text(
-              "Previos Trips",
-              style: TextStyle(fontSize: 20),
-            ),
-            previousTripsList(entries: entries),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Current Trips",
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CurrentTrips()
-          ]),
-        ),
-      ],
+        body: FutureBuilder<User?>(
+      future: user,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Container(
+            child: Text("Loading"),
+          );
+        } else {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 60,
+                      ),
+                      appbar(),
+                      Text(
+                        "Previos Trips",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      previousTripsList(entries: snapshot.data!.prevTrips),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Current Trips",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      CurrentTrips()
+                    ]),
+              ),
+            ],
+          );
+        }
+      },
     ));
   }
 }
@@ -65,7 +76,7 @@ class previousTripsList extends StatelessWidget {
     required this.entries,
   }) : super(key: key);
 
-  final List<String> entries;
+  final List<Trip> entries;
 
   @override
   Widget build(BuildContext context) {
@@ -96,14 +107,20 @@ class previousTripsList extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Colombo - London',
+                              entries[index].flight.from +
+                                  " - " +
+                                  entries[index].flight.to,
                               style: TextStyle(fontSize: 25),
                             ),
                             SizedBox(
                               height: 10,
                             ),
                             Text(
-                              '02-09-2017',
+                              entries[index]
+                                  .flight
+                                  .arrival
+                                  .toString()
+                                  .substring(0, 10),
                               style: TextStyle(fontSize: 20),
                             ),
                           ],
