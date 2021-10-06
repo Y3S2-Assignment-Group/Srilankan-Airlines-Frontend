@@ -70,7 +70,8 @@ class CustomerProvider with ChangeNotifier {
 //todo: set the token
   void login() async {
     final loginResponse = await http.post(
-      Uri.parse("http://localhost:5000/api/user/login"),
+      Uri.parse(
+          "https://srilankanairline-backend.herokuapp.com/api/user/login"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8'
       },

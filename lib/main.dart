@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:srilankan_airline/provider/customer_provider.dart';
 import 'package:srilankan_airline/provider/flights_provider.dart';
+import 'package:srilankan_airline/provider/offers_provider.dart';
 import 'package:srilankan_airline/screens/Login/Login.dart';
 import 'package:srilankan_airline/screens/Payment/payment.dart';
 import 'package:srilankan_airline/screens/Register/Register.dart';
@@ -24,6 +25,7 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => CustomerProvider()),
     ChangeNotifierProvider(create: (_) => FlightProvider()),
+    ChangeNotifierProvider(create: (_) => OfferProvider()),
   ], child: MyApp()));
 }
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
+import 'package:srilankan_airline/provider/offers_provider.dart';
 import 'package:srilankan_airline/screens/offers/FoodAndBeverageList.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
+import 'package:provider/provider.dart';
 
 class SingleOffer extends StatefulWidget {
   const SingleOffer({Key? key}) : super(key: key);
@@ -39,7 +41,7 @@ class _SingleOfferState extends State<SingleOffer> {
                           Container(
                             child: Center(
                               child: Text(
-                                "50%",
+                                context.read<OfferProvider>().getPercentages(),
                                 style: TextStyle(
                                     color: Color(0xFF434343),
                                     fontSize: 30,
@@ -64,7 +66,10 @@ class _SingleOfferState extends State<SingleOffer> {
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
-                              Text("Colombo",
+                              Text(
+                                  context
+                                      .read<OfferProvider>()
+                                      .getDestination(),
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 30,
@@ -81,7 +86,7 @@ class _SingleOfferState extends State<SingleOffer> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                            "https://firebasestorage.googleapis.com/v0/b/econnecteee.appspot.com/o/istanbull.png?alt=media&token=a0cfa3b0-d511-49de-aa77-dd642b96e843"),
+                            context.read<OfferProvider>().getDestinationImg()),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.all(Radius.circular(25))),
               ),
@@ -101,7 +106,7 @@ class _SingleOfferState extends State<SingleOffer> {
                         ),
                         Expanded(
                           child: Text(
-                            "Paris",
+                            context.read<OfferProvider>().getDestination(),
                             style: TextStyle(fontSize: 20, color: Colors.grey),
                           ),
                         ),

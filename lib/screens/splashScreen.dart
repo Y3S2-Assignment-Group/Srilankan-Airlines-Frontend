@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../Util/colors.dart' as color;
 
-
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
 
@@ -38,20 +37,20 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: color.AppColor.splashScreenBackground,
       body: Container(
         alignment: Alignment.center,
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Lottie.asset('assets/images/splashnew.json',
-                  width: 200, controller: _controller, onLoaded: (comp) {
-                _controller
-                  ..duration = comp.duration
-                  ..forward();
-              }),
-            ],
-          ),
-        ),
+        // child: Expanded(
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     children: [
+        //       Lottie.asset('assets/images/splashnew.json',
+        //           width: 200, controller: _controller, onLoaded: (comp) {
+        //         _controller
+        //           ..duration = comp.duration
+        //           ..forward();
+        //       }),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }
