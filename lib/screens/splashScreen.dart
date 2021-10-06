@@ -18,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _controller = AnimationController(vsync: this);
     _controller.addListener(() {
-      print(_controller.value);
       //  if the full duration of the animation is 8 secs then 0.5 is 4 secs
       if (_controller.value > 1) {
 // When it gets there hold it there.
@@ -38,20 +37,20 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: color.AppColor.splashScreenBackground,
       body: Container(
         alignment: Alignment.center,
-        child: Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Lottie.asset('assets/images/splashnew.json',
-                  width: 200, controller: _controller, onLoaded: (comp) {
-                _controller
-                  ..duration = comp.duration
-                  ..forward();
-              }),
-            ],
-          ),
-        ),
+        // child: Expanded(
+        //   child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     children: [
+        //       Lottie.asset('assets/images/splashnew.json',
+        //           width: 200, controller: _controller, onLoaded: (comp) {
+        //         _controller
+        //           ..duration = comp.duration
+        //           ..forward();
+        //       }),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }

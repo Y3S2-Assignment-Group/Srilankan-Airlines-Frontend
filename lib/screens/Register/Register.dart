@@ -19,18 +19,22 @@ class _registerState extends State<register> {
   final passwordText = TextEditingController();
 
   void submit() {
-    if (context.read<CustomerProvider>().getName() != '' && context.read<CustomerProvider>().getEmail() != '' && context.read<CustomerProvider>().getMobileNumber() != ''&& context.read<CustomerProvider>().getPassportNumber() != '' &&  context.read<CustomerProvider>().getPassword() != '') {
-      context.read<CustomerProvider>().register();
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => login()),
-      );
+    if (context.read<CustomerProvider>().getName() != '' &&
+        context.read<CustomerProvider>().getEmail() != '' &&
+        context.read<CustomerProvider>().getMobileNumber() != '' &&
+        context.read<CustomerProvider>().getPassportNumber() != '' &&
+        context.read<CustomerProvider>().getPassword() != '') {
+      context.read<CustomerProvider>().register(context);
     }
   }
 
   @override
   void initState() {
     // TODO: implement initState
+    if (context.read<CustomerProvider>().getToken() != "") {
+      Navigator.pushNamed(context, 'home');
+    }
+
     context.read<CustomerProvider>().setName('');
     context.read<CustomerProvider>().setEmail('');
     context.read<CustomerProvider>().setMobileNumber('');
@@ -38,6 +42,7 @@ class _registerState extends State<register> {
     context.read<CustomerProvider>().setPasswor('');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/src/provider.dart';
+import 'package:srilankan_airline/model/flight_model.dart';
+import 'package:srilankan_airline/provider/customer_provider.dart';
 import 'package:srilankan_airline/provider/flights_provider.dart';
 import '../../Util/colors.dart' as color;
 
@@ -20,22 +22,20 @@ class _returnFlightState extends State<returnFlight> {
   int departureIndex = 0;
   int arivalIndex = 0;
 
+  late Future<List<Flight>> flightList;
+
   static List<String> departureDest = [
     'Colombo Srilanka',
-    'Doha Quatar',
-    'Kolkata India',
-    'Colombo Srilanka',
-    'Doha Quatar',
-    'Kolkata India'
   ];
 
   static List<String> arivalDest = [
     'Doha Quatar',
-    'Colombo Srilanka',
     'Kolkata India',
-    'Colombo Srilanka',
-    'Doha Quatar',
-    'Kolkata India'
+    'London England',
+    'Toronto Canada',
+    'Jakarta Indonisia',
+    'Tokyo Japan',
+    
   ];
 
   //class variables
@@ -129,6 +129,7 @@ class _returnFlightState extends State<returnFlight> {
           onSelectedItemChanged: (index) {
             setState(() {
               this.classIndex = index;
+              context.read<CustomerProvider>().setFlightClass(classSel[index]);
             });
           },
           children: modelBuilder<String>(classSel, (index, value) {
@@ -152,7 +153,8 @@ class _returnFlightState extends State<returnFlight> {
           .toList();
   @override
   void initState() {
-    context.read<FlightProvider>().getFlightList();
+    flightList = context.read<FlightProvider>().getFlightList();
+    
     // TODO: implement initState
     super.initState();
   }
@@ -401,6 +403,18 @@ class _returnFlightState extends State<returnFlight> {
           SizedBox(
             height: 10,
           ),
+          // FutureBuilder<List<Flight>>(
+          //         future: flightList,
+          //         builder: (context, snapshot) {
+          //           if (snapshot.hasData) {
+          //             // ignore: avoid_print
+          //             return Text(snapshot.data![0].arrival);
+          //           } else if (snapshot.hasError) {
+          //             return Text('data');
+          //           }
+          //           return const Text('');
+          //         }),
+            
           Center(
             child: Material(
               elevation: 2,

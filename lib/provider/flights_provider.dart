@@ -6,12 +6,10 @@ import 'package:srilankan_airline/model/flight_model.dart';
 
 class FlightProvider with ChangeNotifier {
   List<Flight> flightsList = [];
-
   Future<List<Flight>> getFlightList() async {
     //todo:
     final responseData =
-        await http.get(Uri.parse('http://localhost:5000/api/flight'));
-    print(responseData.statusCode);
+        await http.get(Uri.parse('https://srilankanairline-backend.herokuapp.com/api/flight'));
 
     if (responseData.statusCode == 200) {
       final data = jsonDecode(responseData.body) as List;

@@ -16,11 +16,10 @@ class _loginState extends State<login> {
   final emailText = TextEditingController();
   final passwordText = TextEditingController();
 
-  void Login(){
+  void Login() {
     if (context.read<CustomerProvider>().getEmail() != '' &&
         context.read<CustomerProvider>().getPassword() != '') {
-      context.read<CustomerProvider>().login();
-      Navigator.pushNamed(context, '/home');
+      context.read<CustomerProvider>().login(context);
     }
   }
 
