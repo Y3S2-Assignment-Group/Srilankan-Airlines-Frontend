@@ -17,7 +17,7 @@ class _FlightsState extends State<Flights> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
+          //height: MediaQuery.of(context).size.height,
           child: Column(
             children: [
               SizedBox(
@@ -35,7 +35,10 @@ class _FlightsState extends State<Flights> {
                 ),
               ),
               Container(height: 300, child: FlightsList()),
-              Container(child: FlightDetails())
+              Container(height: 290, child: FlightDetails()),
+              SizedBox(
+                height: 5,
+              )
             ],
           ),
         ),

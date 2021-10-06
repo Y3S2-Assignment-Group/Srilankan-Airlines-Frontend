@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../Util/colors.dart' as color;
 
-
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
 

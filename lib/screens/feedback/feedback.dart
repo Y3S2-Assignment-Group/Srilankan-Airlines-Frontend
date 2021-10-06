@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
+import 'package:srilankan_airline/provider/feedback_provider.dart';
 import '../../Util/colors.dart' as color;
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class feedback extends StatefulWidget {
   const feedback({Key? key}) : super(key: key);
@@ -11,6 +14,38 @@ class feedback extends StatefulWidget {
 }
 
 class _feedbackState extends State<feedback> {
+  final nameText = TextEditingController();
+  final descriptionText = TextEditingController();
+
+  void onAddFeedback() {
+    if (context.read<FeedbackProvider>().getName() != '' &&
+        context.read<FeedbackProvider>().getDescription() != '' &&
+        context.read<FeedbackProvider>().getRating() != 0) {
+      context.read<FeedbackProvider>().addFeedback();
+      Fluttertoast.showToast(
+          msg: "Feedback sent",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.blue,
+          textColor: Colors.white,
+          fontSize: 16.0);
+
+      context.read<FeedbackProvider>().setName('');
+      context.read<FeedbackProvider>().setDescription('');
+      context.read<FeedbackProvider>().setRating(0);
+    }
+  }
+
+  @override
+  void initState() {
+    context.read<FeedbackProvider>().setName('');
+    context.read<FeedbackProvider>().setDescription('');
+    context.read<FeedbackProvider>().setRating(0);
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +78,10 @@ class _feedbackState extends State<feedback> {
                       TextFormField(
                         keyboardType: TextInputType.text,
                         textAlign: TextAlign.left,
-                        // controller: userName,
+                        controller: nameText,
+                        onChanged: (textValue) {
+                          context.read<FeedbackProvider>().setName(textValue);
+                        },
                         decoration: InputDecoration(
                             focusColor: color.AppColor.textFieldFocusColor,
                             labelText: "Full name ",
@@ -58,28 +96,16 @@ class _feedbackState extends State<feedback> {
                         height: 30,
                       ),
                       TextFormField(
-                        keyboardType: TextInputType.text,
-                        textAlign: TextAlign.left,
-                        // controller: userName,
-                        decoration: InputDecoration(
-                            focusColor: color.AppColor.textFieldFocusColor,
-                            labelText: "Email",
-                            prefixIcon: Icon(Icons.email),
-                            hintStyle: TextStyle(
-                                color: color.AppColor.textFieldHintColor),
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(9.0)))),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      TextFormField(
                         keyboardType: TextInputType.multiline,
                         maxLines: 6,
                         minLines: 4,
                         textAlign: TextAlign.left,
-                        // controller: userName,
+                        controller: descriptionText,
+                        onChanged: (textValue) {
+                          context
+                              .read<FeedbackProvider>()
+                              .setDescription(textValue);
+                        },
                         decoration: InputDecoration(
                             focusColor: color.AppColor.textFieldFocusColor,
                             labelText: "Comment ",
@@ -109,6 +135,9 @@ class _feedbackState extends State<feedback> {
                             ),
                             onRatingUpdate: (rating) {
                               print(rating);
+                              context
+                                  .read<FeedbackProvider>()
+                                  .setRating(rating);
                             },
                           ),
                         ],
@@ -126,9 +155,7 @@ class _feedbackState extends State<feedback> {
                             color: color.AppColor.buttonColor,
                             borderRadius: BorderRadius.circular(12.0),
                             child: MaterialButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/home');
-                              },
+                              onPressed: onAddFeedback,
                               minWidth: 50.0,
                               height: 45.0,
                               child: Text(
@@ -151,7 +178,21 @@ class _feedbackState extends State<feedback> {
                               },
                               minWidth: 50.0,
                               height: 45.0,
-                              child: Row(children: [Icon(Icons.phone_android,color: Colors.white,),Text("Call",style: TextStyle(color: Colors.white,fontSize:20,fontWeight: FontWeight.w600),)],),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.phone_android,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    "Call",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(

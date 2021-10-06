@@ -8,8 +8,9 @@ class FlightProvider with ChangeNotifier {
   List<Flight> flightsList = [];
   Future<List<Flight>> getFlightList() async {
     //todo:
-    final responseData =
-        await http.get(Uri.parse('https://srilankanairline-backend.herokuapp.com/api/flight'));
+    final responseData = await http.get(
+        Uri.parse('https://srilankanairline-backend.herokuapp.com/api/flight'));
+    print(responseData.statusCode);
 
     if (responseData.statusCode == 200) {
       final data = jsonDecode(responseData.body) as List;
