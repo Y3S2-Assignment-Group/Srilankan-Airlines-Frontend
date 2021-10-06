@@ -5,6 +5,7 @@ import 'package:srilankan_airline/provider/feedback_provider.dart';
 import 'package:srilankan_airline/provider/flightplane_provider.dart';
 import 'package:srilankan_airline/provider/flights_provider.dart';
 import 'package:srilankan_airline/provider/offers_provider.dart';
+import 'package:srilankan_airline/provider/user_provider.dart';
 import 'package:srilankan_airline/screens/Login/Login.dart';
 import 'package:srilankan_airline/screens/Payment/payment.dart';
 import 'package:srilankan_airline/screens/Register/Register.dart';
@@ -30,6 +31,7 @@ void main() {
     ChangeNotifierProvider(create: (_) => OfferProvider()),
     ChangeNotifierProvider(create: (_) => FeedbackProvider()),
     ChangeNotifierProvider(create: (_) => FlightPlaneProvider()),
+    ChangeNotifierProvider(create: (_) => UserProvider())
   ], child: MyApp()));
 }
 
