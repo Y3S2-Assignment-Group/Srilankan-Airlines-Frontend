@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:srilankan_airline/provider/flightplane_provider.dart';
 
 class FlightDetails extends StatefulWidget {
   const FlightDetails({Key? key}) : super(key: key);
@@ -11,7 +13,7 @@ class _FlightDetailsState extends State<FlightDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 30),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
@@ -20,31 +22,21 @@ class _FlightDetailsState extends State<FlightDetails> {
           Container(
             margin: const EdgeInsets.only(bottom: 15),
             child: Image.network(
-                "https://firebasestorage.googleapis.com/v0/b/econnecteee.appspot.com/o/plane_0030.png?alt=media&token=965372bc-4674-43f1-8090-3bdb068e7f90"),
+                context.read<FlightPlaneProvider>().getplaneImg()),
           ),
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Text(
-                    "Sri Lankan Airline",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "CAD4277",
-                    style: TextStyle(fontSize: 13),
-                  )
-                ],
-              ),
-              Expanded(child: Container()),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "CMB---",
+                    context.read<FlightPlaneProvider>().getplaneNo(),
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  Expanded(child: Container()),
+                  Text(
+                    context.read<FlightPlaneProvider>().getfrom() + "---",
                     style: TextStyle(
                         fontSize: 20,
                         color: Color(0xFF0064D4),
@@ -55,12 +47,91 @@ class _FlightDetailsState extends State<FlightDetails> {
                     color: Color(0xFF0064D4),
                   ),
                   Text(
-                    "---LDN",
+                    "---" + Provider.of<FlightPlaneProvider>(context).to,
                     style: TextStyle(
                         fontSize: 20,
                         color: Color(0xFF0064D4),
                         fontWeight: FontWeight.bold),
                   ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        "Departure",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        context
+                            .read<FlightPlaneProvider>()
+                            .getdeparture()
+                            .toString()
+                            .substring(0, 10),
+                        style: TextStyle(fontSize: 15),
+                      )
+                    ],
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        "Arrival",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        context
+                            .read<FlightPlaneProvider>()
+                            .getarrival()
+                            .toString()
+                            .substring(0, 10),
+                        style: TextStyle(fontSize: 15),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text(
+                    "Gate",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    context.read<FlightPlaneProvider>().getgate(),
+                    style: TextStyle(fontSize: 16),
+                  )
                 ],
               )
             ],

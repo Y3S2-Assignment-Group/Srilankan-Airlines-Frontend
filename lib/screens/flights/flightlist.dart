@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:srilankan_airline/model/flight_model.dart';
+import 'package:srilankan_airline/provider/flightplane_provider.dart';
 import 'package:srilankan_airline/provider/flights_provider.dart';
 
 class FlightsList extends StatefulWidget {
@@ -51,32 +52,56 @@ class _FlightsListState extends State<FlightsList> {
                             color: Colors.grey,
                           ),
                         )),
-                        child: Row(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  snapshot.data![index].to +
-                                      " - " +
-                                      snapshot.data![index].from,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  snapshot.data![index].plane.planeNo,
-                                  style: TextStyle(fontSize: 13),
-                                )
-                              ],
-                            ),
-                            Expanded(child: Container()),
-                            Icon(
-                              Icons.arrow_drop_down,
-                              size: 40,
-                            )
-                          ],
+                        child: InkWell(
+                          onTap: () {
+                            print("clicked");
+                            context.read<FlightPlaneProvider>().setplaneNo(
+                                snapshot.data![index].plane.planeNo);
+                            context.read<FlightPlaneProvider>().setplaneImg(
+                                snapshot.data![index].plane.planeImg);
+                            context
+                                .read<FlightPlaneProvider>()
+                                .setarrival(snapshot.data![index].arrival);
+                            context
+                                .read<FlightPlaneProvider>()
+                                .setdeparture(snapshot.data![index].departure);
+                            context
+                                .read<FlightPlaneProvider>()
+                                .setfrom(snapshot.data![index].from);
+                            context
+                                .read<FlightPlaneProvider>()
+                                .setto(snapshot.data![index].to);
+                            context
+                                .read<FlightPlaneProvider>()
+                                .setgate(snapshot.data![index].gate);
+                          },
+                          child: Row(
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    snapshot.data![index].to +
+                                        " - " +
+                                        snapshot.data![index].from,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    snapshot.data![index].plane.planeNo,
+                                    style: TextStyle(fontSize: 13),
+                                  )
+                                ],
+                              ),
+                              Expanded(child: Container()),
+                              Icon(
+                                Icons.arrow_drop_down,
+                                size: 40,
+                              )
+                            ],
+                          ),
                         ),
                       );
                     });
