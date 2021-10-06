@@ -20,7 +20,9 @@ class _appbarState extends State<appbar> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Lottie.asset('assets/images/appbarlottie.json', width: 60),
               ],
             ),
@@ -76,7 +78,7 @@ class _appbarState extends State<appbar> {
                             MaterialStateProperty.all<Color>(Colors.black),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '');
+                        Navigator.pushNamed(context, '/login');
                       },
                       child:
                           Row(children: [Icon(Icons.logout), Text('Logout')]),
