@@ -59,7 +59,7 @@ class _myTripsState extends State<myTrips> {
                       SizedBox(
                         height: 20,
                       ),
-                      CurrentTrips()
+                      CurrentTrips(singleTrip: snapshot.data!.currentTrip)
                     ]),
               ),
             ],
@@ -149,7 +149,10 @@ class previousTripsList extends StatelessWidget {
 class CurrentTrips extends StatelessWidget {
   const CurrentTrips({
     Key? key,
+    required this.singleTrip,
   }) : super(key: key);
+
+  final Trip singleTrip;
 
   @override
   Widget build(BuildContext context) {
@@ -166,14 +169,17 @@ class CurrentTrips extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "CMB",
+                      singleTrip.flight.from,
                       style: TextStyle(
                           color: color.AppColor.buttonColor,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "10:45",
+                      singleTrip.flight.departure
+                          .toIso8601String()
+                          .toString()
+                          .substring(0, 10),
                       style: TextStyle(
                           color: color.AppColor.buttonColor, fontSize: 20),
                     ),
@@ -213,14 +219,17 @@ class CurrentTrips extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "LDN",
+                      singleTrip.flight.to,
                       style: TextStyle(
                           color: color.AppColor.buttonColor,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "04:25",
+                      singleTrip.flight.arrival
+                          .toIso8601String()
+                          .toString()
+                          .substring(0, 10),
                       style: TextStyle(
                           color: color.AppColor.buttonColor, fontSize: 20),
                     ),
@@ -242,7 +251,7 @@ class CurrentTrips extends StatelessWidget {
                       style: TextStyle(color: Color(0xFF868686), fontSize: 12),
                     ),
                     Text(
-                      "GE305",
+                      singleTrip.flight.id.substring(0, 4),
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -259,7 +268,10 @@ class CurrentTrips extends StatelessWidget {
                       style: TextStyle(color: Color(0xFF868686), fontSize: 12),
                     ),
                     Text(
-                      "10:45",
+                      singleTrip.flight.departure
+                          .toIso8601String()
+                          .toString()
+                          .substring(11, 16),
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -276,7 +288,7 @@ class CurrentTrips extends StatelessWidget {
                       style: TextStyle(color: Color(0xFF868686), fontSize: 12),
                     ),
                     Text(
-                      "34",
+                      singleTrip.flight.gate,
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -293,7 +305,7 @@ class CurrentTrips extends StatelessWidget {
                       style: TextStyle(color: Color(0xFF868686), fontSize: 12),
                     ),
                     Text(
-                      "19C",
+                      singleTrip.seatNo,
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
