@@ -75,6 +75,15 @@ class Trip {
   Flight flight;
   bool checkinStatus;
   bool bookingStatus;
+  String get getId => this.id;
+
+  Flight getflight() {
+    return this.flight;
+  }
+
+  String getTripID() {
+    return this.id;
+  }
 
   factory Trip.fromJson(Map<String, dynamic> json) => Trip(
       id: json["_id"],

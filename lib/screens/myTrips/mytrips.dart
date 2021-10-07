@@ -142,6 +142,9 @@ class previousTripsList extends StatelessWidget {
                             context
                                 .read<UserProvider>()
                                 .setFlightID(entries[index].id);
+                            context
+                                .read<UserProvider>()
+                                .setFlightID(entries[index].id);
 
                             print(context.read<UserProvider>().getArival());
                             print(context.read<UserProvider>().getArivaltime());
@@ -347,6 +350,8 @@ class CurrentTrips extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
                 child: MaterialButton(
                   onPressed: () {
+                    context.read<UserProvider>().setCurrentTrip(singleTrip);
+                    print(context.read<UserProvider>().getCurrentTrip().id);
                     Navigator.pushNamed(context, '/checkin');
                   },
                   minWidth: 200.0,

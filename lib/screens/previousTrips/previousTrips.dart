@@ -273,15 +273,22 @@ class _previousTripsState extends State<previousTrips> {
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF999999)),
                             ),
-                            FutureBuilder<User>(
-                              future: user,
-                              builder: (context, snapshot) {
-                                return Text(snapshot.data!.name,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        color: Color(0xFF717280),
-                                        fontSize: 20));
-                              },
+                            // FutureBuilder<User>(
+                            //   future: user,
+                            //   builder: (context, snapshot) {
+                            //     return Text(snapshot.data!.name,
+                            //         style: TextStyle(
+                            //             fontWeight: FontWeight.w900,
+                            //             color: Color(0xFF717280),
+                            //             fontSize: 20));
+                            //   },
+                            // ),
+                            Text(
+                              context.read<UserProvider>().getCustomerName(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(0xFF717280),
+                                  fontSize: 20),
                             ),
                           ]),
                     ],

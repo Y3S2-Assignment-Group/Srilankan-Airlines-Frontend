@@ -4,9 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:srilankan_airline/model/user_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:srilankan_airline/screens/checkin/checkin.dart';
 
 class UserProvider with ChangeNotifier {
   late User user;
+  late Trip currentTrip;
+  late String customername;
 
   late String flightid;
   late String departuretime;
@@ -22,6 +25,22 @@ class UserProvider with ChangeNotifier {
 
   String getFlightID() {
     return this.flightid;
+  }
+
+  void setCustomerName(String customername) {
+    this.customername = customername;
+  }
+
+  String getCustomerName() {
+    return this.customername;
+  }
+
+  void setCurrentTrip(Trip currentTrip) {
+    this.currentTrip = currentTrip;
+  }
+
+  Trip getCurrentTrip() {
+    return this.currentTrip;
   }
 
   void setDeparturetime(String departuretime) {
@@ -76,11 +95,11 @@ class UserProvider with ChangeNotifier {
     final authToken = await FlutterSecureStorage().read(key: 'token');
 
     if (authToken != null) {
-      print('called');
       final profileResponse = await http.get(
         Uri.parse('https://srilankanairline-backend.herokuapp.com/api/user'),
         headers: {'x-auth-token': authToken},
       );
+      print(profileResponse.statusCode);
 
       if (profileResponse.statusCode == 200) {
         notifyListeners();
@@ -92,6 +111,19 @@ class UserProvider with ChangeNotifier {
       }
     } else {
       return user;
+    }
+  }
+
+  void checkin(String tripID) async {
+    final authToken = await FlutterSecureStorage().read(key: 'token');
+
+    if (authToken != null) {
+      final checkinResponse = await http.put(
+        Uri.parse(
+            'https://srilankanairline-backend.herokuapp.com/api/user/checkIn/$tripID'),
+        headers: {'x-auth-token': authToken},
+      );
+      print(checkinResponse.statusCode);
     }
   }
 }

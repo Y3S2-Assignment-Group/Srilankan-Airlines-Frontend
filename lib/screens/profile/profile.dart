@@ -163,6 +163,9 @@ class _ProfileState extends State<Profile> {
                                   borderRadius: BorderRadius.circular(12.0),
                                   child: MaterialButton(
                                     onPressed: () {
+                                      context
+                                          .read<UserProvider>()
+                                          .setCustomerName(snapshot.data!.name);
                                       Navigator.pushNamed(context, '/mytrips');
                                     },
                                     minWidth: 200.0,
