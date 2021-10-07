@@ -1,6 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
+import 'package:provider/src/provider.dart';
+import 'package:srilankan_airline/model/flight_model.dart';
+import 'package:srilankan_airline/provider/customer_provider.dart';
+import 'package:srilankan_airline/provider/flights_provider.dart';
 import '../../Util/colors.dart' as color;
 
 class scheduleTrips extends StatefulWidget {
@@ -11,17 +16,165 @@ class scheduleTrips extends StatefulWidget {
 }
 
 class _scheduleTripsState extends State<scheduleTrips> {
-  final List<String> entries = <String>[
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
+  DateTime dateDeparture = DateTime.now();
+  DateTime dateReturn = DateTime.now();
+
+//Place variables
+  int departureIndex = 0;
+  int returnIndex = 0;
+
+  late Future<List<Flight>> flightList;
+
+  static List<String> departureDest = [
+    'Colombo Srilanka',
   ];
+
+  static List<String> returnDest = [
+    'Doha Quatar',
+    'Kolkata India',
+    'London England',
+    'Toronto Canada',
+    'Jakarta Indonisia',
+    'Tokyo Japan',
+  ];
+
+  int classIndex = 0;
+
+  static List<String> classSel = ['Economy', 'Business'];
+
+  void scheduleAndMove() {
+    context.read<CustomerProvider>().setArival(returnDest[returnIndex]);
+    context
+        .read<CustomerProvider>()
+        .setDeparture(departureDest[departureIndex]);
+    context.read<CustomerProvider>().setArivalDate(dateReturn.toString());
+    context.read<CustomerProvider>().setDepartureDate(dateDeparture.toString());
+    context.read<CustomerProvider>().setFlightClass(classSel[classIndex]);
+
+    print(context.read<CustomerProvider>().getArival());
+    print(context.read<CustomerProvider>().getDeparture());
+    print(context.read<CustomerProvider>().getDepartureDate());
+    print(context.read<CustomerProvider>().getArivalDate());
+    print(context.read<CustomerProvider>().getFlightClass());
+
+    Navigator.pushNamed(context, '/seats');
+  }
+
+  static void showSheet(BuildContext context,
+          {required Widget child, required VoidCallback onClicked}) =>
+      showCupertinoModalPopup(
+          context: context,
+          builder: (context) => CupertinoActionSheet(
+                actions: [child],
+                cancelButton: CupertinoActionSheetAction(
+                  child: Text('Done'),
+                  onPressed: onClicked,
+                ),
+              ));
+
+  Widget buildDatePickerDeparture() => SizedBox(
+        height: 300,
+        child: CupertinoDatePicker(
+            initialDateTime: dateDeparture,
+            mode: CupertinoDatePickerMode.date,
+            onDateTimeChanged: (pickedDate) {
+              setState(() {
+                this.dateDeparture = pickedDate;
+              });
+            }),
+      );
+
+  Widget buildDatePickerReturn() => SizedBox(
+        height: 300,
+        child: CupertinoDatePicker(
+            initialDateTime: dateReturn,
+            mode: CupertinoDatePickerMode.date,
+            onDateTimeChanged: (pickedDate) {
+              setState(() {
+                this.dateReturn = pickedDate;
+              });
+            }),
+      );
+
+  //destination pickers
+  Widget buildDeparturePicker() => SizedBox(
+        height: 300,
+        child: CupertinoPicker(
+          itemExtent: 60,
+          onSelectedItemChanged: (index) {
+            setState(() {
+              this.departureIndex = index;
+            });
+          },
+          children: modelBuilder<String>(departureDest, (index, value) {
+            return Center(
+              child: Text(
+                value,
+                style: TextStyle(color: Colors.black, fontSize: 24),
+              ),
+            );
+          }),
+        ),
+      );
+
+  Widget buildArivalPicker() => SizedBox(
+        height: 300,
+        child: CupertinoPicker(
+          itemExtent: 60,
+          onSelectedItemChanged: (index) {
+            setState(() {
+              this.returnIndex = index;
+            });
+          },
+          children: modelBuilder<String>(returnDest, (index, value) {
+            return Center(
+              child: Text(
+                value,
+                style: TextStyle(color: Colors.black, fontSize: 24),
+              ),
+            );
+          }),
+        ),
+      );
+
+  //classSelPicker
+  Widget buildClassPicker() => SizedBox(
+        height: 300,
+        child: CupertinoPicker(
+          itemExtent: 60,
+          onSelectedItemChanged: (index) {
+            setState(() {
+              this.classIndex = index;
+            });
+          },
+          children: modelBuilder<String>(classSel, (index, value) {
+            return Center(
+              child: Text(
+                value,
+                style: TextStyle(color: Colors.black, fontSize: 24),
+              ),
+            );
+          }),
+        ),
+      );
+
+  static List<Widget> modelBuilder<M>(
+          List<M> models, Widget Function(int index, M model) builder) =>
+      models
+          .asMap()
+          .map<int, Widget>(
+              (index, model) => MapEntry(index, builder(index, model)))
+          .values
+          .toList();
+
+  @override
+  void initState() {
+    flightList = context.read<FlightProvider>().getFlightList();
+
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,31 +210,24 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                      "Doha",
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: color.AppColor.airportColor),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "DHO",
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              color.AppColor.airportabrColor),
-                                    ),
+                                    CupertinoButton(
+                                      padding: EdgeInsets.all(0),
+                                      onPressed: () {
+                                        showSheet(context,
+                                            child: buildDeparturePicker(),
+                                            onClicked: () {
+                                          Navigator.pop(context);
+                                        });
+                                      },
+                                      child: Text(
+                                        "${departureDest[departureIndex]}",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue),
+                                      ),
+                                    )
                                   ],
-                                ),
-                                Text(
-                                  "Hamad international airport",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -110,31 +256,24 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                      "Colombo",
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color: color.AppColor.airportColor),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "COL",
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold,
-                                          color:
-                                              color.AppColor.airportabrColor),
-                                    ),
+                                    CupertinoButton(
+                                      padding: EdgeInsets.all(0),
+                                      onPressed: () {
+                                        showSheet(context,
+                                            child: buildArivalPicker(),
+                                            onClicked: () {
+                                          Navigator.pop(context);
+                                        });
+                                      },
+                                      child: Text(
+                                        "${returnDest[returnIndex]}",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue),
+                                      ),
+                                    )
                                   ],
-                                ),
-                                Text(
-                                  "Katunayake international airport",
-                                  style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -173,12 +312,23 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                       "Departure",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Text(
-                                      "26 Jul 2021",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                    CupertinoButton(
+                                      padding: EdgeInsets.all(0),
+                                      onPressed: () {
+                                        showSheet(context,
+                                            child: buildDatePickerDeparture(),
+                                            onClicked: () {
+                                          Navigator.pop(context);
+                                        });
+                                      },
+                                      child: Text(
+                                        "${dateDeparture.year} - ${dateDeparture.month} - ${dateDeparture.day}",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                    )
                                   ],
                                 ),
                                 Column(
@@ -188,12 +338,23 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                       "Return",
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    Text(
-                                      "30 Jul 2021",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                    CupertinoButton(
+                                      padding: EdgeInsets.all(0),
+                                      onPressed: () {
+                                        showSheet(context,
+                                            child: buildDatePickerReturn(),
+                                            onClicked: () {
+                                          Navigator.pop(context);
+                                        });
+                                      },
+                                      child: Text(
+                                        "${dateReturn.year} - ${dateReturn.month} - ${dateReturn.day}",
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
+                                      ),
+                                    )
                                   ],
                                 )
                               ],
@@ -231,13 +392,23 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text(
-                                      "Economy",
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff018bef)),
-                                    ),
+                                    CupertinoButton(
+                                      padding: EdgeInsets.all(0),
+                                      onPressed: () {
+                                        showSheet(context,
+                                            child: buildClassPicker(),
+                                            onClicked: () {
+                                          Navigator.pop(context);
+                                        });
+                                      },
+                                      child: Text(
+                                        "${classSel[classIndex]}",
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue),
+                                      ),
+                                    )
                                   ],
                                 )
                               ],
@@ -260,9 +431,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
                   color: color.AppColor.buttonColor,
                   borderRadius: BorderRadius.circular(12.0),
                   child: MaterialButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/mytrips');
-                    },
+                    onPressed: scheduleAndMove,
                     minWidth: MediaQuery.of(context).size.width,
                     height: 45.0,
                     child: Text(
@@ -286,7 +455,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
                             color: Colors.black,
                           ),
                       padding: const EdgeInsets.all(8),
-                      itemCount: entries.length,
+                      itemCount: returnDest.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           decoration: BoxDecoration(
