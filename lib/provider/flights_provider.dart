@@ -21,19 +21,14 @@ class FlightProvider with ChangeNotifier {
     //todo:
     final responseData = await http.get(
         Uri.parse('https://srilankanairline-backend.herokuapp.com/api/flight'));
-    print("Response code is" + responseData.statusCode.toString());
-
     if (responseData.statusCode == 200) {
       final data = jsonDecode(responseData.body) as List;
-      if (flightsList.isNotEmpty) {
-        return flightsList;
-      } else {
-        for (Map<String, dynamic> item in data) {
-          var flight = Flight.fromJson(item);
-          flightsList.add(flight);
-        }
-        return flightsList;
+      for (var item in data) {
+        var flight = Flight.fromJson(item);
+        flightsList.add(flight);
       }
+
+      return flightsList;
     } else {
       return flightsList;
     }

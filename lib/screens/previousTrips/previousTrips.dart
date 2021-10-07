@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+import 'package:srilankan_airline/model/user_model.dart';
+import 'package:srilankan_airline/model/user_previous_trips_model.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
+import 'package:srilankan_airline/provider/user_previous_trips_provider.dart';
+import 'package:srilankan_airline/provider/user_provider.dart';
 
 class previousTrips extends StatefulWidget {
-  const previousTrips({ Key? key }) : super(key: key);
+  const previousTrips({Key? key}) : super(key: key);
 
   @override
   _previousTripsState createState() => _previousTripsState();
 }
 
 class _previousTripsState extends State<previousTrips> {
+  late Future<List<PreviousTrips?>> previousTripsList;
+
+  @override
+  void initState() {
+    previousTripsList =
+        context.read<UserPreviousTripProvider>().getUserPreviousTripsList();
+
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +52,17 @@ class _previousTripsState extends State<previousTrips> {
                 Column(
                   children: [
                     Text(
-                      "CMB",
+                      context.read<UserProvider>().getDeparture(),
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      "10.45",
+                      context
+                          .read<UserProvider>()
+                          .getDeparturetime()
+                          .substring(10, 16),
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -86,14 +105,17 @@ class _previousTripsState extends State<previousTrips> {
                 Column(
                   children: [
                     Text(
-                      "LDN",
+                      context.read<UserProvider>().getArival(),
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      "4.25",
+                      context
+                          .read<UserProvider>()
+                          .getArivaltime()
+                          .substring(10, 16),
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -144,7 +166,10 @@ class _previousTripsState extends State<previousTrips> {
                                 color: Color(0xFF999999)),
                           ),
                           Text(
-                            "GE305",
+                            context
+                                .read<UserProvider>()
+                                .getFlightID()
+                                .substring(0, 3),
                             style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 color: Color(0xFF717280),
@@ -165,7 +190,10 @@ class _previousTripsState extends State<previousTrips> {
                                 color: Color(0xFF999999)),
                           ),
                           Text(
-                            "10.45",
+                            context
+                                .read<UserProvider>()
+                                .getDeparturetime()
+                                .substring(10, 16),
                             style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 color: Color(0xFF717280),
@@ -194,7 +222,10 @@ class _previousTripsState extends State<previousTrips> {
                                   color: Color(0xFF999999)),
                             ),
                             Text(
-                              "10.45",
+                              context
+                                  .read<UserProvider>()
+                                  .getArivaltime()
+                                  .substring(10, 16),
                               style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   color: Color(0xFF717280),
@@ -214,7 +245,7 @@ class _previousTripsState extends State<previousTrips> {
                                 color: Color(0xFF999999)),
                           ),
                           Text(
-                            "34",
+                            context.read<UserProvider>().getGate(),
                             style: TextStyle(
                                 fontWeight: FontWeight.w900,
                                 color: Color(0xFF717280),
@@ -224,24 +255,6 @@ class _previousTripsState extends State<previousTrips> {
                       ),
                       SizedBox(
                         width: 40,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Seat",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF999999)),
-                          ),
-                          Text(
-                            "19C",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: Color(0xFF717280),
-                                fontSize: 25),
-                          ),
-                        ],
                       ),
                     ],
                   ),
@@ -263,12 +276,22 @@ class _previousTripsState extends State<previousTrips> {
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xFF999999)),
                             ),
+                            // FutureBuilder<User>(
+                            //   future: user,
+                            //   builder: (context, snapshot) {
+                            //     return Text(snapshot.data!.name,
+                            //         style: TextStyle(
+                            //             fontWeight: FontWeight.w900,
+                            //             color: Color(0xFF717280),
+                            //             fontSize: 20));
+                            //   },
+                            // ),
                             Text(
-                              "Lasal Hettiarachchi",
+                              context.read<UserProvider>().getCustomerName(),
                               style: TextStyle(
                                   fontWeight: FontWeight.w900,
                                   color: Color(0xFF717280),
-                                  fontSize: 25),
+                                  fontSize: 20),
                             ),
                           ]),
                     ],

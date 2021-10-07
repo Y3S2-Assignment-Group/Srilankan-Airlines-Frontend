@@ -3,6 +3,7 @@ import 'package:srilankan_airline/model/user_current_trip.dart';
 import 'package:srilankan_airline/model/user_previous_trips_model.dart';
 import 'package:srilankan_airline/provider/user_current_trip_provider.dart';
 import 'package:srilankan_airline/provider/user_previous_trips_provider.dart';
+import 'package:srilankan_airline/provider/user_provider.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
 import '../../Util/colors.dart' as color;
 import 'package:provider/provider.dart';
@@ -162,6 +163,28 @@ class previousTripsList extends StatelessWidget {
                           Expanded(child: Container()),
                           IconButton(
                               onPressed: () {
+                                context
+                                    .read<UserProvider>()
+                                    .setArival(entries[index]!.flight.to);
+                                context.read<UserProvider>().setArivaltime(
+                                    entries[index]!.flight.arrival.toString());
+                                context
+                                    .read<UserProvider>()
+                                    .setDeparture(entries[index]!.flight.from);
+                                context.read<UserProvider>().setDeparturetime(
+                                    entries[index]!
+                                        .flight
+                                        .departure
+                                        .toString());
+                                context
+                                    .read<UserProvider>()
+                                    .setGate(entries[index]!.flight.gate);
+                                context
+                                    .read<UserProvider>()
+                                    .setFlightID(entries[index]!.id);
+                                context
+                                    .read<UserProvider>()
+                                    .setFlightID(entries[index]!.id);
                                 Navigator.pushNamed(context, '/previousTrips');
                               },
                               icon: Icon(

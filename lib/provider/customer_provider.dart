@@ -22,6 +22,8 @@ class CustomerProvider with ChangeNotifier {
   String arivalDate = '';
   String flightClass = '';
   String seatNo = '';
+  String returnflight = '';
+  String returnDate = '';
 
   void setSeatNo(String seat) {
     this.seatNo = seat;
@@ -55,6 +57,14 @@ class CustomerProvider with ChangeNotifier {
     return this.arival;
   }
 
+  void setReturnflight(String arival) {
+    this.arival = arival;
+  }
+
+  String getReturnflight() {
+    return this.arival;
+  }
+
   void setDepartureDate(String departureDate) {
     this.departureDate = departureDate;
   }
@@ -68,6 +78,14 @@ class CustomerProvider with ChangeNotifier {
   }
 
   String getArivalDate() {
+    return this.arivalDate;
+  }
+
+  void setReturnDate(String arivalDate) {
+    this.arivalDate = arivalDate;
+  }
+
+  String getReturnDate() {
     return this.arivalDate;
   }
 
@@ -129,6 +147,8 @@ class CustomerProvider with ChangeNotifier {
         'password': this.password,
         'passportNumber': this.password,
         'mobileNumber': this.mobileNumber,
+        'profileImg':
+            'https://www.pngkit.com/png/detail/108-1082173_male-profile-face.png',
       }),
     );
     print(registerResponse.statusCode);
@@ -168,6 +188,21 @@ class CustomerProvider with ChangeNotifier {
     final bookflightResponse = await http.post(
       Uri.parse(
           "https://srilankanairline-backend.herokuapp.com/api/user/bookTrip"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': this.token
+      },
+      body: jsonEncode(<String, dynamic>{
+        'flightClass': this.flightClass,
+        'flight': {"_id": flightID},
+      }),
+    );
+  }
+
+  void scheduleflight(String flightID) async {
+    final scheduleflightResponse = await http.post(
+      Uri.parse(
+          "https://srilankanairline-backend.herokuapp.com/api/user/scheduleTrip"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': this.token
