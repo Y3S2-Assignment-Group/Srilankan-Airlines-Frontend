@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:srilankan_airline/model/user_model.dart';
-import 'package:srilankan_airline/modules/BottomNavigation.dart';
-import 'package:srilankan_airline/provider/user_provider.dart';
+import 'package:srilankan_airline/model/user_current_trip.dart';
+import 'package:srilankan_airline/model/user_previous_trips_model.dart';
+import 'package:srilankan_airline/provider/user_current_trip_provider.dart';
+import 'package:srilankan_airline/provider/user_previous_trips_provider.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
 import '../../Util/colors.dart' as color;
 import 'package:provider/provider.dart';
@@ -14,19 +15,22 @@ class myTrips extends StatefulWidget {
 }
 
 class _myTripsState extends State<myTrips> {
-  late Future<User?> user;
+  late Future<List<PreviousTrips?>> previousTripList;
+  late Future<UserCurrentTrip?> currentTrip;
 
   @override
   void initState() {
     super.initState();
-    user = context.read<UserProvider>().getUserProfile();
+    previousTripList =
+        context.read<UserPreviousTripProvider>().getUserPreviousTripsList();
+    currentTrip = context.read<UserCurrentTripProvider>().getUserCurrentTrip();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<User?>(
-      future: user,
+        body: FutureBuilder<List<PreviousTrips?>>(
+      future: previousTripList,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Container(
@@ -45,10 +49,10 @@ class _myTripsState extends State<myTrips> {
                       ),
                       appbar(),
                       Text(
-                        "Previos Trips",
+                        "Previous Trips",
                         style: TextStyle(fontSize: 20),
                       ),
-                      previousTripsList(entries: snapshot.data!.prevTrips),
+                      previousTripsList(entries: snapshot.data!),
                       SizedBox(
                         height: 20,
                       ),
@@ -59,7 +63,27 @@ class _myTripsState extends State<myTrips> {
                       SizedBox(
                         height: 20,
                       ),
-                      CurrentTrips(singleTrip: snapshot.data!.currentTrip)
+                      FutureBuilder<UserCurrentTrip?>(
+                          future: currentTrip,
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Container(
+                                child: Center(
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text("No Current Trip Available")
+                                      ]),
+                                ),
+                              );
+                            } else {
+                              return CurrentTrips(singleTrip: snapshot.data!);
+                            }
+                          })
+                      //CurrentTrips(singleTrip: snapshot.data!)
                     ]),
               ),
             ],
@@ -76,7 +100,7 @@ class previousTripsList extends StatelessWidget {
     required this.entries,
   }) : super(key: key);
 
-  final List<Trip> entries;
+  final List<PreviousTrips?> entries;
 
   @override
   Widget build(BuildContext context) {
@@ -91,55 +115,66 @@ class previousTripsList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             itemCount: entries.length,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                decoration: BoxDecoration(
-                    color: Color(0xFFE4E4E4),
-                    borderRadius: BorderRadius.circular(10)),
-                child: ListTile(
-                  onTap: () {},
-                  title: Container(
-                    margin: EdgeInsets.only(bottom: 2, top: 2),
-                    height: 100,
-                    child: Row(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              entries[index].flight.from +
-                                  " - " +
-                                  entries[index].flight.to,
-                              style: TextStyle(fontSize: 25),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              entries[index]
-                                  .flight
-                                  .arrival
-                                  .toString()
-                                  .substring(0, 10),
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: Container()),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/previousTrips');
-                            },
-                            icon: Icon(
-                              Icons.flight,
-                              color: color.AppColor.buttonColor,
-                              size: 40,
-                            ))
-                      ],
+              if (entries.length == 0) {
+                return Container(
+                  child: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [Text("No Previous Trips Available")]),
+                  ),
+                );
+              } else {
+                return Container(
+                  decoration: BoxDecoration(
+                      color: Color(0xFFE4E4E4),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: ListTile(
+                    onTap: () {},
+                    title: Container(
+                      margin: EdgeInsets.only(bottom: 2, top: 2),
+                      height: 100,
+                      child: Row(
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                entries[index]!.flight.from +
+                                    " - " +
+                                    entries[index]!.flight.to,
+                                style: TextStyle(fontSize: 25),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                entries[index]!
+                                    .flight
+                                    .arrival
+                                    .toString()
+                                    .substring(0, 10),
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                          Expanded(child: Container()),
+                          IconButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/previousTrips');
+                              },
+                              icon: Icon(
+                                Icons.flight,
+                                color: color.AppColor.buttonColor,
+                                size: 40,
+                              ))
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
+                );
+              }
             }),
       ),
     );
@@ -152,7 +187,7 @@ class CurrentTrips extends StatelessWidget {
     required this.singleTrip,
   }) : super(key: key);
 
-  final Trip singleTrip;
+  final UserCurrentTrip singleTrip;
 
   @override
   Widget build(BuildContext context) {
