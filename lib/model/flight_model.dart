@@ -55,6 +55,7 @@ class Flight {
     required this.gate,
     required this.status,
     required this.plane,
+    required this.seats,
   });
 
   String id;
@@ -65,6 +66,7 @@ class Flight {
   String gate;
   String status;
   Plane plane;
+  List<List<int>> seats;
 
   factory Flight.fromJson(Map<String, dynamic> json) => Flight(
         id: json["_id"],
@@ -74,6 +76,7 @@ class Flight {
         arrival: DateTime.parse(json["arrival"]),
         gate: json["gate"],
         status: json["status"],
+        seats: json["seats"],
         plane: Plane.fromJson(json["plane"]),
       );
 

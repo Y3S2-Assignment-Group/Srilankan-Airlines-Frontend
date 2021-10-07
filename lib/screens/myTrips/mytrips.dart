@@ -82,66 +82,87 @@ class previousTripsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: Expanded(
-        child: ListView.separated(
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(
-                  color: Colors.black,
-                ),
-            padding: const EdgeInsets.all(8),
-            itemCount: entries.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                decoration: BoxDecoration(
-                    color: Color(0xFFE4E4E4),
-                    borderRadius: BorderRadius.circular(10)),
-                child: ListTile(
-                  onTap: () {},
-                  title: Container(
-                    margin: EdgeInsets.only(bottom: 2, top: 2),
-                    height: 100,
-                    child: Row(
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              entries[index].flight.from +
-                                  " - " +
-                                  entries[index].flight.to,
-                              style: TextStyle(fontSize: 25),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              entries[index]
-                                  .flight
-                                  .arrival
-                                  .toString()
-                                  .substring(0, 10),
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: Container()),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/previousTrips');
-                            },
-                            icon: Icon(
-                              Icons.flight,
-                              color: color.AppColor.buttonColor,
-                              size: 40,
-                            ))
-                      ],
-                    ),
+      child: ListView.separated(
+          separatorBuilder: (BuildContext context, int index) => const Divider(
+                color: Colors.black,
+              ),
+          padding: const EdgeInsets.all(8),
+          itemCount: entries.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              decoration: BoxDecoration(
+                  color: Color(0xFFE4E4E4),
+                  borderRadius: BorderRadius.circular(10)),
+              child: ListTile(
+                onTap: () {},
+                title: Container(
+                  margin: EdgeInsets.only(bottom: 2, top: 2),
+                  height: 100,
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            entries[index].flight.from +
+                                " - " +
+                                entries[index].flight.to,
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            entries[index]
+                                .flight
+                                .arrival
+                                .toString()
+                                .substring(0, 10),
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      Expanded(child: Container()),
+                      IconButton(
+                          onPressed: () {
+                            context
+                                .read<UserProvider>()
+                                .setArival(entries[index].flight.to);
+                            context.read<UserProvider>().setArivaltime(
+                                entries[index].flight.arrival.toString());
+                            context
+                                .read<UserProvider>()
+                                .setDeparture(entries[index].flight.from);
+                            context.read<UserProvider>().setDeparturetime(
+                                entries[index].flight.departure.toString());
+                            context
+                                .read<UserProvider>()
+                                .setGate(entries[index].flight.gate);
+                            context
+                                .read<UserProvider>()
+                                .setFlightID(entries[index].id);
+
+                            print(context.read<UserProvider>().getArival());
+                            print(context.read<UserProvider>().getArivaltime());
+                            print(context.read<UserProvider>().getDeparture());
+                            print(context
+                                .read<UserProvider>()
+                                .getDeparturetime());
+                            print(context.read<UserProvider>().getGate());
+                            Navigator.pushNamed(context, '/previousTrips');
+                          },
+                          icon: Icon(
+                            Icons.flight,
+                            color: color.AppColor.buttonColor,
+                            size: 40,
+                          ))
+                    ],
                   ),
                 ),
-              );
-            }),
-      ),
+              ),
+            );
+          }),
     );
   }
 }

@@ -172,6 +172,7 @@ class CustomerProvider with ChangeNotifier {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': this.token
       },
+      
       body: jsonEncode(<String, dynamic>{
         'flightClass': this.flightClass,
         'flight': {"_id": flightID},
