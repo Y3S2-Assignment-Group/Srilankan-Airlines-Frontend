@@ -47,14 +47,14 @@ class _scheduleTripsState extends State<scheduleTrips> {
     context
         .read<CustomerProvider>()
         .setDeparture(departureDest[departureIndex]);
-    context.read<CustomerProvider>().setArivalDate(dateReturn.toString());
+    context.read<CustomerProvider>().setReturnDate(dateReturn.toString());
     context.read<CustomerProvider>().setDepartureDate(dateDeparture.toString());
     context.read<CustomerProvider>().setFlightClass(classSel[classIndex]);
 
-    print(context.read<CustomerProvider>().getArival());
+    print(context.read<CustomerProvider>().getReturnflight());
     print(context.read<CustomerProvider>().getDeparture());
     print(context.read<CustomerProvider>().getDepartureDate());
-    print(context.read<CustomerProvider>().getArivalDate());
+    print(context.read<CustomerProvider>().getReturnDate());
     print(context.read<CustomerProvider>().getFlightClass());
 
     Navigator.pushNamed(context, '/seats');
@@ -117,7 +117,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
         ),
       );
 
-  Widget buildArivalPicker() => SizedBox(
+  Widget buildReturnPicker() => SizedBox(
         height: 300,
         child: CupertinoPicker(
           itemExtent: 60,
@@ -260,7 +260,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                       padding: EdgeInsets.all(0),
                                       onPressed: () {
                                         showSheet(context,
-                                            child: buildArivalPicker(),
+                                            child: buildReturnPicker(),
                                             onClicked: () {
                                           Navigator.pop(context);
                                         });
