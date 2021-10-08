@@ -23,6 +23,7 @@ class _returnFlightState extends State<returnFlight> {
   int arivalIndex = 0;
 
   late Future<List<Flight>> flightList;
+  late Future<Flight> flight;
 
   static List<String> departureDest = [
     'Colombo Srilanka',
@@ -123,6 +124,9 @@ class _returnFlightState extends State<returnFlight> {
         child: CupertinoPicker(
           itemExtent: 60,
           onSelectedItemChanged: (index) {
+            flight = context
+                .read<FlightProvider>()
+                .getFlightDetails(arivalDest[index]);
             setState(() {
               this.arivalIndex = index;
             });
@@ -170,7 +174,7 @@ class _returnFlightState extends State<returnFlight> {
 
   @override
   void initState() {
-    flightList = context.read<FlightProvider>().getFlightList();
+    flight = context.read<FlightProvider>().getFlightDetails("Doha Quatar");
 
     // TODO: implement initState
     super.initState();
@@ -295,68 +299,86 @@ class _returnFlightState extends State<returnFlight> {
                 children: [
                   Row(
                     children: [
-                      Expanded(
-                          child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Departure",
-                                  style: TextStyle(fontSize: 15),
+                      FutureBuilder<Flight>(
+                          future: flight,
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return Container(
+                                child: Text("Loading"),
+                              );
+                            } else {
+                              return Expanded(
+                                  child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30, vertical: 10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Departure",
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                        CupertinoButton(
+                                          padding: EdgeInsets.all(0),
+                                          onPressed: () {
+                                            showSheet(context,
+                                                child:
+                                                    buildDatePickerDeparture(),
+                                                onClicked: () {
+                                              Navigator.pop(context);
+                                            });
+                                          },
+                                          child: Text(
+                                            snapshot.data!.departure
+                                                .toString()
+                                                .substring(0, 10),
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "Return",
+                                          style: TextStyle(fontSize: 15),
+                                        ),
+                                        CupertinoButton(
+                                          padding: EdgeInsets.all(0),
+                                          onPressed: () {
+                                            showSheet(context,
+                                                child: buildDatePickerArival(),
+                                                onClicked: () {
+                                              Navigator.pop(context);
+                                            });
+                                          },
+                                          child: Text(
+                                            snapshot.data!.arrival
+                                                .toString()
+                                                .substring(0, 10),
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                CupertinoButton(
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () {
-                                    showSheet(context,
-                                        child: buildDatePickerDeparture(),
-                                        onClicked: () {
-                                      Navigator.pop(context);
-                                    });
-                                  },
-                                  child: Text(
-                                    "${dateDeparture.year} - ${dateDeparture.month} - ${dateDeparture.day}",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  "Return",
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                CupertinoButton(
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () {
-                                    showSheet(context,
-                                        child: buildDatePickerArival(),
-                                        onClicked: () {
-                                      Navigator.pop(context);
-                                    });
-                                  },
-                                  child: Text(
-                                    "${dateArival.year} - ${dateArival.month} - ${dateArival.day}",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      )),
+                              ));
+                            }
+                          })
                     ],
                   ),
                   Padding(

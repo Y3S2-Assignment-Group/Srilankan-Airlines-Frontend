@@ -11,7 +11,19 @@ class SeatSelection extends StatefulWidget {
 }
 
 class _SeatSelectionState extends State<SeatSelection> {
-  List<List<int>> _chairStatus = [];
+  List<List<int>> _chairStatus = [
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1]
+  ];
 
   Widget _seatList() {
     Size size = MediaQuery.of(context).size;

@@ -8,6 +8,8 @@ class FlightProvider with ChangeNotifier {
   List<Flight> flightsList = [];
   late Flight flight;
   List<List<int>> seatsList = [];
+  late DateTime departure;
+  late DateTime arrival;
 
   void setSeatsList(List<List<int>> seatsList) {
     this.seatsList = seatsList;
@@ -17,18 +19,27 @@ class FlightProvider with ChangeNotifier {
     return this.seatsList;
   }
 
+  Flight getFlightGetter() {
+    return this.flight;
+  }
+
   Future<List<Flight>> getFlightList() async {
     //todo:
     final responseData = await http.get(
         Uri.parse('https://srilankanairline-backend.herokuapp.com/api/flight'));
+    print("Response code is" + responseData.statusCode.toString());
+
     if (responseData.statusCode == 200) {
       final data = jsonDecode(responseData.body) as List;
-      for (var item in data) {
-        var flight = Flight.fromJson(item);
-        flightsList.add(flight);
+      if (flightsList.isNotEmpty) {
+        return flightsList;
+      } else {
+        for (Map<String, dynamic> item in data) {
+          var flight = Flight.fromJson(item);
+          flightsList.add(flight);
+        }
+        return flightsList;
       }
-
-      return flightsList;
     } else {
       return flightsList;
     }
@@ -43,6 +54,7 @@ class FlightProvider with ChangeNotifier {
     if (responseData.statusCode == 200) {
       final data = jsonDecode(responseData.body);
       this.flight = Flight.fromJson(data);
+      notifyListeners();
       return flight;
     } else {
       return flight;
@@ -60,5 +72,20 @@ class FlightProvider with ChangeNotifier {
         'seats': this.seatsList,
       }),
     );
+  }
+
+  Future<Flight> getFlightDetails(String dest) async {
+    final responseData = await http.get(Uri.parse(
+        'https://srilankanairline-backend.herokuapp.com/api/flight/destination/London'));
+    print(responseData.statusCode);
+
+    if (responseData.statusCode == 200) {
+      notifyListeners();
+      final data = jsonDecode(responseData.body);
+      flight = new Flight.fromJson(data);
+      return flight;
+    } else {
+      return flight;
+    }
   }
 }
