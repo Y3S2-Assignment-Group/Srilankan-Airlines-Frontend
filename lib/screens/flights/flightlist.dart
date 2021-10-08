@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:srilankan_airline/model/flight_model.dart';
 import 'package:srilankan_airline/provider/flightplane_provider.dart';
@@ -22,6 +23,7 @@ class _FlightsListState extends State<FlightsList> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
@@ -34,9 +36,12 @@ class _FlightsListState extends State<FlightsList> {
             future: flights,
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Container(
-                  child: Text("Loading"),
-                );
+                return SizedBox(
+                    height: size.height,
+                    child: Center(
+                      child: Lottie.asset('assets/images/appbarlottie.json',
+                          width: 80),
+                    ));
               } else {
                 return ListView.builder(
                     padding: const EdgeInsets.all(8),

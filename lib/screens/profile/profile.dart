@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:srilankan_airline/model/user_model.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
 import 'package:srilankan_airline/provider/user_provider.dart';
@@ -24,15 +25,19 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: FutureBuilder<User?>(
           future: user,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return Container(
-                child: Text("Loading"),
-              );
+              return SizedBox(
+                  height: size.height,
+                  child: Center(
+                    child: Lottie.asset('assets/images/appbarlottie.json',
+                        width: 80),
+                  ));
             } else {
               return Column(
                 children: [
