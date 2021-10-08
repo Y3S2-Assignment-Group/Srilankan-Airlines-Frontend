@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:srilankan_airline/model/user_current_trip.dart';
 import 'package:srilankan_airline/model/user_previous_trips_model.dart';
 import 'package:srilankan_airline/provider/user_current_trip_provider.dart';
@@ -29,14 +30,18 @@ class _myTripsState extends State<myTrips> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: FutureBuilder<List<PreviousTrips?>>(
       future: previousTripList,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Container(
-            child: Text("Loading"),
-          );
+          return SizedBox(
+              height: size.height,
+              child: Center(
+                child:
+                    Lottie.asset('assets/images/appbarlottie.json', width: 80),
+              ));
         } else {
           return Column(
             children: [

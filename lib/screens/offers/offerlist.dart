@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:srilankan_airline/model/offer_model.dart';
 import 'package:srilankan_airline/provider/offers_provider.dart';
 import 'package:provider/provider.dart';
@@ -21,14 +22,18 @@ class _OfferlistState extends State<Offerlist> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: FutureBuilder<List<Offer>>(
         future: offers,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Container(
-              child: Text("Loading"),
-            );
+            return SizedBox(
+                height: size.height,
+                child: Center(
+                  child: Lottie.asset('assets/images/appbarlottie.json',
+                      repeat: true, width: 80),
+                ));
           } else {
             return ListView.builder(
                 padding: const EdgeInsets.all(8),
