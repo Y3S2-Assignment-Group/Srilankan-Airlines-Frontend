@@ -168,7 +168,6 @@ class _paymentState extends State<payment> {
                       context.read<FlightProvider>().getFlightGetter().id);
                   context.read<FlightProvider>().updateFlightSeast(
                       context.read<FlightProvider>().getFlightGetter().id);
-                  Navigator.pushNamed(context, '/');
                   Navigator.pushNamed(context, '/recipt');
                 },
                 minWidth: 200.0,
