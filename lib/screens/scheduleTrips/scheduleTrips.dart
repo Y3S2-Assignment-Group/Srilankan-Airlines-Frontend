@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'package:srilankan_airline/model/user_scheduled_trips_model.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
+import 'package:srilankan_airline/provider/user_scheduled_trips_provider.dart';
 import 'package:srilankan_airline/widgets/appbar.dart';
 import 'package:provider/src/provider.dart';
 import 'package:srilankan_airline/model/flight_model.dart';
@@ -25,6 +28,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
   int returnIndex = 0;
 
   late Future<List<Flight>> flightList;
+  late Future<List<ScheduledTrips>> scheduledTripsList;
 
   static List<String> departureDest = [
     'Colombo Srilanka',
@@ -178,13 +182,15 @@ class _scheduleTripsState extends State<scheduleTrips> {
   @override
   void initState() {
     flight = context.read<FlightProvider>().getFlightDetails("Doha Quatar");
-
+    scheduledTripsList =
+        context.read<UserScheduledTripProvider>().getUserscheduledTripsList();
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -469,82 +475,106 @@ class _scheduleTripsState extends State<scheduleTrips> {
               Container(
                 height: 200,
                 child: Expanded(
-                  child: ListView.separated(
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const Divider(
-                            color: Colors.black,
-                          ),
-                      padding: const EdgeInsets.all(8),
-                      itemCount: returnDest.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xFFE4E4E4),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: ListTile(
-                            onTap: () {},
-                            title: Container(
-                              margin: EdgeInsets.only(bottom: 2, top: 2),
-                              height: 30,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "CMB",
-                                    style: TextStyle(
-                                        color: color.AppColor.buttonColor,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "...",
-                                        style: TextStyle(
-                                            color: color.AppColor.buttonColor,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
+                  child: FutureBuilder<List<ScheduledTrips>>(
+                      future: scheduledTripsList,
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return SizedBox(
+                              height: size.height,
+                              child: Center(
+                                child: Lottie.asset(
+                                    'assets/images/appbarlottie.json',
+                                    repeat: true,
+                                    width: 80),
+                              ));
+                        } else {
+                          return ListView.separated(
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      const Divider(
+                                        color: Colors.black,
                                       ),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Icon(
-                                        Icons.flight,
-                                        color: color.AppColor.buttonColor,
-                                        size: 30,
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "...",
-                                        style: TextStyle(
-                                            color: color.AppColor.buttonColor,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
+                              padding: const EdgeInsets.all(8),
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFFE4E4E4),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: ListTile(
+                                    onTap: () {},
+                                    title: Container(
+                                      margin:
+                                          EdgeInsets.only(bottom: 2, top: 2),
+                                      height: 30,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            snapshot.data![index].flight.from,
+                                            style: TextStyle(
+                                                color:
+                                                    color.AppColor.buttonColor,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "...",
+                                                style: TextStyle(
+                                                    color: color
+                                                        .AppColor.buttonColor,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              Icon(
+                                                Icons.flight,
+                                                color:
+                                                    color.AppColor.buttonColor,
+                                                size: 30,
+                                              )
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                "...",
+                                                style: TextStyle(
+                                                    color: color
+                                                        .AppColor.buttonColor,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            snapshot.data![index].flight.to,
+                                            style: TextStyle(
+                                                color:
+                                                    color.AppColor.buttonColor,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
+                                    trailing: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: color.AppColor.buttonColor,
+                                      size: 20,
+                                    ),
                                   ),
-                                  Text(
-                                    "LDN",
-                                    style: TextStyle(
-                                        color: color.AppColor.buttonColor,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            trailing: Icon(
-                              Icons.arrow_forward_ios,
-                              color: color.AppColor.buttonColor,
-                              size: 20,
-                            ),
-                          ),
-                        );
+                                );
+                              });
+                        }
                       }),
                 ),
               ),

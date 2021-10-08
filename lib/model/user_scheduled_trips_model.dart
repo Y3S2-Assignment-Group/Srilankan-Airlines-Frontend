@@ -21,7 +21,7 @@ class ScheduledTrips {
   String id;
   String flightClass;
   String seatNo;
-  Flight flight;
+  FlightSchedule flight;
   bool checkinStatus;
   bool bookingStatus;
   int v;
@@ -30,7 +30,7 @@ class ScheduledTrips {
         id: json["_id"],
         flightClass: json["flightClass"],
         seatNo: json["seatNo"],
-        flight: Flight.fromJson(json["flight"]),
+        flight: FlightSchedule.fromJson(json["flight"]),
         checkinStatus: json["checkinStatus"],
         bookingStatus: json["bookingStatus"],
         v: json["__v"],
@@ -47,8 +47,8 @@ class ScheduledTrips {
       };
 }
 
-class Flight {
-  Flight({
+class FlightSchedule {
+  FlightSchedule({
     required this.id,
     required this.to,
     required this.from,
@@ -70,7 +70,7 @@ class Flight {
   String plane;
   int v;
 
-  factory Flight.fromJson(Map<String, dynamic> json) => Flight(
+  factory FlightSchedule.fromJson(Map<String, dynamic> json) => FlightSchedule(
         id: json["_id"],
         to: json["to"],
         from: json["from"],
