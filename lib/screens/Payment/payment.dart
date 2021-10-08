@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:srilankan_airline/modules/BottomNavigation.dart';
+import 'package:srilankan_airline/provider/customer_provider.dart';
+import 'package:srilankan_airline/provider/flights_provider.dart';
 import '../../Util/colors.dart' as color;
+import 'package:provider/src/provider.dart';
 
 class payment extends StatefulWidget {
   const payment({Key? key}) : super(key: key);
@@ -161,15 +164,18 @@ class _paymentState extends State<payment> {
               borderRadius: BorderRadius.circular(12.0),
               child: MaterialButton(
                 onPressed: () {
+                  context.read<CustomerProvider>().bookflight(
+                      context.read<FlightProvider>().getFlightGetter().id);
+                  context.read<FlightProvider>().updateFlightSeast(
+                      context.read<FlightProvider>().getFlightGetter().id);
+                  Navigator.pushNamed(context, '/');
                   Navigator.pushNamed(context, '/recipt');
                 },
                 minWidth: 200.0,
                 height: 45.0,
                 child: Text(
                   "Pay",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0),
+                  style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ),
             ),

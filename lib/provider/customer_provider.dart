@@ -20,10 +20,19 @@ class CustomerProvider with ChangeNotifier {
   String arival = '';
   String departureDate = '';
   String arivalDate = '';
+  String flightId = '';
   String flightClass = '';
   String seatNo = '';
   String returnflight = '';
   String returnDate = '';
+
+  void setFlightId(String flightId) {
+    this.flightId = flightId;
+  }
+
+  String getFlightId() {
+    return this.flightId;
+  }
 
   void setSeatNo(String seat) {
     this.seatNo = seat;
@@ -194,6 +203,7 @@ class CustomerProvider with ChangeNotifier {
       },
       body: jsonEncode(<String, dynamic>{
         'flightClass': this.flightClass,
+        'seatNo': 'F29',
         'flight': {"_id": flightID},
       }),
     );

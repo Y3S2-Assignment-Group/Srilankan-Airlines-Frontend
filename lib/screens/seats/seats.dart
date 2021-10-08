@@ -25,7 +25,10 @@ class _SeatsState extends State<Seats> {
           SizedBox(
             height: 10,
           ),
-          Container(height: 500,padding: EdgeInsets.symmetric(horizontal: 20), child: SeatSelection()),
+          Container(
+              height: 500,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SeatSelection()),
           SizedBox(
             height: 10,
           ),
