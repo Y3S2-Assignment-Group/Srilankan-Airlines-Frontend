@@ -72,6 +72,7 @@ class FlightProvider with ChangeNotifier {
         'seats': this.seatsList,
       }),
     );
+    notifyListeners();
   }
 
   Future<Flight> getFlightDetails(String dest) async {
@@ -80,9 +81,9 @@ class FlightProvider with ChangeNotifier {
     print(responseData.statusCode);
 
     if (responseData.statusCode == 200) {
-      notifyListeners();
       final data = jsonDecode(responseData.body);
       flight = new Flight.fromJson(data);
+      notifyListeners();
       return flight;
     } else {
       return flight;

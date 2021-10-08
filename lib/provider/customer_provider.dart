@@ -214,17 +214,23 @@ class CustomerProvider with ChangeNotifier {
   }
 
   void scheduleflight(String flightID) async {
-    final scheduleflightResponse = await http.post(
+    final String? authToken = await FlutterSecureStorage().read(key: 'token');
+    final scheduleFlight = await http.post(
       Uri.parse(
           "https://srilankanairline-backend.herokuapp.com/api/user/scheduleTrip"),
-      headers: <String, String>{
+      headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': this.token
+        'x-auth-token': authToken!,
       },
       body: jsonEncode(<String, dynamic>{
         'flightClass': this.flightClass,
+        'seatNo': 'F29',
         'flight': {"_id": flightID},
       }),
     );
+
+    print("flightClass" + this.flightClass);
+    print("flight" + flightID);
+    print("book flight status" + scheduleFlight.statusCode.toString());
   }
 }

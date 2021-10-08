@@ -18,6 +18,7 @@ class scheduleTrips extends StatefulWidget {
 class _scheduleTripsState extends State<scheduleTrips> {
   DateTime dateDeparture = DateTime.now();
   DateTime dateReturn = DateTime.now();
+  late Future<Flight> flight;
 
 //Place variables
   int departureIndex = 0;
@@ -51,13 +52,17 @@ class _scheduleTripsState extends State<scheduleTrips> {
     context.read<CustomerProvider>().setDepartureDate(dateDeparture.toString());
     context.read<CustomerProvider>().setFlightClass(classSel[classIndex]);
 
+    context
+        .read<CustomerProvider>()
+        .scheduleflight(context.read<FlightProvider>().getFlightGetter().id);
+
     print(context.read<CustomerProvider>().getReturnflight());
     print(context.read<CustomerProvider>().getDeparture());
     print(context.read<CustomerProvider>().getDepartureDate());
     print(context.read<CustomerProvider>().getReturnDate());
     print(context.read<CustomerProvider>().getFlightClass());
 
-    Navigator.pushNamed(context, '/seats');
+    Navigator.pushNamed(context, '/home');
   }
 
   static void showSheet(BuildContext context,
@@ -125,6 +130,9 @@ class _scheduleTripsState extends State<scheduleTrips> {
             setState(() {
               this.returnIndex = index;
             });
+            flight = context
+                .read<FlightProvider>()
+                .getFlightDetails(returnDest[index]);
           },
           children: modelBuilder<String>(returnDest, (index, value) {
             return Center(
@@ -169,7 +177,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
 
   @override
   void initState() {
-    flightList = context.read<FlightProvider>().getFlightList();
+    flight = context.read<FlightProvider>().getFlightDetails("Doha Quatar");
 
     // TODO: implement initState
     super.initState();
@@ -298,68 +306,80 @@ class _scheduleTripsState extends State<scheduleTrips> {
                     children: [
                       Row(
                         children: [
-                          Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Departure",
-                                      style: TextStyle(fontSize: 15),
+                          FutureBuilder<Flight>(
+                              future: flight,
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return Container(
+                                    child: Text("Loading"),
+                                  );
+                                } else {
+                                  return Expanded(
+                                      child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30, vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Departure",
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            CupertinoButton(
+                                              padding: EdgeInsets.all(0),
+                                              onPressed: () {
+                                                showSheet(context,
+                                                    child:
+                                                        buildDatePickerDeparture(),
+                                                    onClicked: () {
+                                                  Navigator.pop(context);
+                                                });
+                                              },
+                                              child: Text(
+                                                snapshot.data!.departure
+                                                    .toString()
+                                                    .substring(0, 10),
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              "Return",
+                                              style: TextStyle(fontSize: 15),
+                                            ),
+                                            CupertinoButton(
+                                              padding: EdgeInsets.all(0),
+                                              onPressed: () {},
+                                              child: Text(
+                                                snapshot.data!.arrival
+                                                    .toString()
+                                                    .substring(0, 10),
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
                                     ),
-                                    CupertinoButton(
-                                      padding: EdgeInsets.all(0),
-                                      onPressed: () {
-                                        showSheet(context,
-                                            child: buildDatePickerDeparture(),
-                                            onClicked: () {
-                                          Navigator.pop(context);
-                                        });
-                                      },
-                                      child: Text(
-                                        "${dateDeparture.year} - ${dateDeparture.month} - ${dateDeparture.day}",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "Return",
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                    CupertinoButton(
-                                      padding: EdgeInsets.all(0),
-                                      onPressed: () {
-                                        showSheet(context,
-                                            child: buildDatePickerReturn(),
-                                            onClicked: () {
-                                          Navigator.pop(context);
-                                        });
-                                      },
-                                      child: Text(
-                                        "${dateReturn.year} - ${dateReturn.month} - ${dateReturn.day}",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          )),
+                                  ));
+                                }
+                              })
                         ],
                       ),
                       Padding(
