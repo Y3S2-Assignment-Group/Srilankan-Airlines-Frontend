@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/src/provider.dart';
 import 'package:srilankan_airline/model/flight_model.dart';
 import 'package:srilankan_airline/provider/customer_provider.dart';
@@ -182,6 +183,7 @@ class _returnFlightState extends State<returnFlight> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: [
@@ -303,8 +305,21 @@ class _returnFlightState extends State<returnFlight> {
                           future: flight,
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
-                              return Container(
-                                child: Text("Loading"),
+                              return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
+                                  ),
+                                  Lottie.asset(
+                                      'assets/images/appbarlottie.json',
+                                      width: 80),
+                                  SizedBox(
+                                    width: 50,
+                                  ),
+                                ],
                               );
                             } else {
                               return Expanded(
