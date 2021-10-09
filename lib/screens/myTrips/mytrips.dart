@@ -147,9 +147,9 @@ class previousTripsList extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                entries[index]!.flight.from +
+                                entries[index]!.flight.from.split(" ")[0] +
                                     " - " +
-                                    entries[index]!.flight.to,
+                                    entries[index]!.flight.to.split(" ")[0],
                                 style: TextStyle(fontSize: 25),
                               ),
                               SizedBox(
@@ -232,7 +232,7 @@ class CurrentTrips extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      singleTrip.flight.from,
+                      singleTrip.flight.from.split(" ")[0],
                       style: TextStyle(
                           color: color.AppColor.buttonColor,
                           fontSize: 20,
@@ -282,7 +282,7 @@ class CurrentTrips extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      singleTrip.flight.to,
+                      singleTrip.flight.to.split(" ")[0],
                       style: TextStyle(
                           color: color.AppColor.buttonColor,
                           fontSize: 20,

@@ -67,7 +67,7 @@ class _checkinState extends State<checkin> {
                             Column(
                               children: [
                                 Text(
-                                  snapshot.data!.flight.from,
+                                  snapshot.data!.flight.from.split(" ")[0],
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -119,7 +119,7 @@ class _checkinState extends State<checkin> {
                             Column(
                               children: [
                                 Text(
-                                  snapshot.data!.flight.to,
+                                  snapshot.data!.flight.to.split(" ")[0],
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,

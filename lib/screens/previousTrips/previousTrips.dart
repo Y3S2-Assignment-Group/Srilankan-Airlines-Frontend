@@ -52,7 +52,7 @@ class _previousTripsState extends State<previousTrips> {
                 Column(
                   children: [
                     Text(
-                      context.read<UserProvider>().getDeparture(),
+                      context.read<UserProvider>().getDeparture().split(" ")[0],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -105,7 +105,7 @@ class _previousTripsState extends State<previousTrips> {
                 Column(
                   children: [
                     Text(
-                      context.read<UserProvider>().getArival(),
+                      context.read<UserProvider>().getArival().split(" ")[0],
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,

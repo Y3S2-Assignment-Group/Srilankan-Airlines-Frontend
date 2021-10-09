@@ -91,7 +91,7 @@ class _FlightsListState extends State<FlightsList> {
                                         " - " +
                                         snapshot.data![index].from,
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(

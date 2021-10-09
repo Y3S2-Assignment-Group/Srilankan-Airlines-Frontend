@@ -512,7 +512,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Text(
-                                            snapshot.data![index].flight.from,
+                                            snapshot.data![index].flight.from.split(" ")[0],
                                             style: TextStyle(
                                                 color:
                                                     color.AppColor.buttonColor,
@@ -556,7 +556,7 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                             ],
                                           ),
                                           Text(
-                                            snapshot.data![index].flight.to,
+                                            snapshot.data![index].flight.to.split(" ")[0],
                                             style: TextStyle(
                                                 color:
                                                     color.AppColor.buttonColor,
