@@ -56,6 +56,9 @@ class _SeatsState extends State<Seats> {
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

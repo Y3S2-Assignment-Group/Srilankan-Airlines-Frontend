@@ -13,19 +13,18 @@ class _FlightDetailsState extends State<FlightDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 30),
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 30),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
           color: Colors.grey.shade200, borderRadius: BorderRadius.circular(20)),
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(bottom: 15),
+            margin: const EdgeInsets.only(bottom: 5),
             child: Image.network(
                 context.read<FlightPlaneProvider>().getplaneImg()),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -34,11 +33,16 @@ class _FlightDetailsState extends State<FlightDetails> {
                     context.read<FlightPlaneProvider>().getplaneNo(),
                     style: TextStyle(fontSize: 18),
                   ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Expanded(child: Container()),
                   Text(
                     context.read<FlightPlaneProvider>().getfrom() + "---",
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                         color: Color(0xFF0064D4),
                         fontWeight: FontWeight.bold),
                   ),
@@ -49,7 +53,7 @@ class _FlightDetailsState extends State<FlightDetails> {
                   Text(
                     "---" + Provider.of<FlightPlaneProvider>(context).to,
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                         color: Color(0xFF0064D4),
                         fontWeight: FontWeight.bold),
                   ),

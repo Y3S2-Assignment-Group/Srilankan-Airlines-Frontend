@@ -77,7 +77,7 @@ class FlightProvider with ChangeNotifier {
 
   Future<Flight> getFlightDetails(String dest) async {
     final responseData = await http.get(Uri.parse(
-        'https://srilankanairline-backend.herokuapp.com/api/flight/destination/London'));
+        'https://srilankanairline-backend.herokuapp.com/api/flight/destination/$dest'));
     print(responseData.statusCode);
 
     if (responseData.statusCode == 200) {
