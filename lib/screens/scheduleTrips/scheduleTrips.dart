@@ -316,8 +316,23 @@ class _scheduleTripsState extends State<scheduleTrips> {
                               future: flight,
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
-                                  return Container(
-                                    child: Text("Loading"),
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                3,
+                                      ),
+                                      Lottie.asset(
+                                          'assets/images/appbarlottie.json',
+                                          width: 80),
+                                      SizedBox(
+                                        width: 50,
+                                      ),
+                                    ],
                                   );
                                 } else {
                                   return Expanded(
@@ -512,7 +527,8 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Text(
-                                            snapshot.data![index].flight.from.split(" ")[0],
+                                            snapshot.data![index].flight.from
+                                                .split(" ")[0],
                                             style: TextStyle(
                                                 color:
                                                     color.AppColor.buttonColor,
@@ -556,7 +572,8 @@ class _scheduleTripsState extends State<scheduleTrips> {
                                             ],
                                           ),
                                           Text(
-                                            snapshot.data![index].flight.to.split(" ")[0],
+                                            snapshot.data![index].flight.to
+                                                .split(" ")[0],
                                             style: TextStyle(
                                                 color:
                                                     color.AppColor.buttonColor,
