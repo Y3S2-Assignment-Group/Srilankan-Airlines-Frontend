@@ -53,8 +53,8 @@ class _ProfileState extends State<Profile> {
                     children: [
                       CircleAvatar(
                           radius: 80,
-                          backgroundImage: NetworkImage(
-                              'https://th.bing.com/th/id/OIP.8ywzf72LxkfVNzP5k_Ya2gHaHa?w=206&h=206&c=7&r=0&o=5&dpr=1.25&pid=1.7'))
+                          backgroundImage:
+                              NetworkImage(snapshot.data!.profileImg))
                     ],
                   ),
                   SizedBox(
